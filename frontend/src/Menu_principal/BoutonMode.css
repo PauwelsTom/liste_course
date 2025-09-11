@@ -19,6 +19,10 @@
 
     margin-top: 5vh;
 
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+
     transition: ease 0.5s;
 }
 
