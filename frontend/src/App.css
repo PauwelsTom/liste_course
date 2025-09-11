@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+  
+  height: 98vh;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  overflow: hidden;
+
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.Hidden {
+  display: none;
+  height: 0;
+  width: 0;
+}

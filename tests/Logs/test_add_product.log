@@ -1,0 +1,7 @@
+test: test_add_product
+
+LOG - Connexion à la page avec succès
+
+LOG - Ajout d'un produit avec succès
+
+END - Temps écoulé: 0.24 secondes

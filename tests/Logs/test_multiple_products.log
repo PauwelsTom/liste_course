@@ -1,0 +1,14 @@
+test: test_multiple_products
+
+LOG - Connexion à la page avec succès
+
+LOG - Ajout de 'Simple' avec succès.
+Total: 3.5 [+3.5]
+
+LOG - Ajout de 'Double' avec succès.
+Total: 9.0 [+5.5]
+
+LOG - Ajout de 'Triple' avec succès.
+Total: 16.5 [+7.5]
+
+END - Temps écoulé: 0.32 secondes

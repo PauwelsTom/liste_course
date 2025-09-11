@@ -1,0 +1,5 @@
+test: test_connect_page
+
+LOG - Connexion à la page avec succès
+
+END - Temps écoulé: 0.17 secondes
