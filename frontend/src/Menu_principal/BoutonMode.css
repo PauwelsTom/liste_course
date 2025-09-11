@@ -1,27 +1,28 @@
 .BoutonModeDiv {
-    background-color: orange;
+    background-color: white;
 
-    height: 10vh;
+    height: 8vh;
     width: 80vw;
     padding-left: 5vw;
     padding-right: 1vw;
 
-    border: 1vh solid red;
+    border: 1vh solid var(--couleur-menu-princpal);
     border-radius: 10vh;
     box-shadow: none;
 
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
-    font-size: 3vh;
+    font-size: 3.5vh;
+    font-weight: 800;
+    color: var(--couleur-menu-princpal);
 
-    margin-top: 5vh;
+    margin-bottom: 5vh;
 
     cursor: default;
     text-decoration: none;
-    color: inherit;
 
     transition: ease 0.5s;
 }
@@ -29,19 +30,22 @@
 .BoutonModeDiv:hover {
     width: 85vw;
     height: 12vh;
+
+    background-color: var(--couleur-menu-princpal);
+    color: white;
 }
 
 .BoutonFlèche {
-    height: 6vh;
-    width: 6vh;
+    height: 4vh;
+    width: 4vh;
 
-    border: 1vh solid red;
-    border-radius: 9vh;
+    border: 0.5vh solid var(--couleur-menu-princpal);
+    border-radius: 4vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 5vh;
-    font-weight: 800;
-    color: red;
+    font-weight: 600;
+    color: var(--couleur-menu-princpal);
 }

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import './Couleurs.css';
 import { ListeModes } from './Menu_principal/ListeModes';
 import { PageFoyer } from './Foyer/PageFoyer';
 import { PageListe } from './Liste/PageListe';

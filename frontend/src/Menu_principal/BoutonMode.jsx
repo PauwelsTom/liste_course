@@ -13,10 +13,7 @@ export class BoutonMode extends Component {
     render() {
         return (
             <Link className="BoutonModeDiv" to={this.link}>
-                <div>{this.name}</div>
-                <div className="BoutonFlèche">
-                    {">"}
-                </div>
+                {this.name}
             </Link>
         );
     }
