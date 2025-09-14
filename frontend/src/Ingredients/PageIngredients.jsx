@@ -3,6 +3,7 @@ import { BoutonRetour } from "../Menu_principal/BoutonRetour";
 import { Ingredient } from "./Ingredient";
 import { IngredientModif } from "./IngredientModif";
 import "./PageIngredients.css"
+import "../Couleurs.css"
 import { Component } from "react";
 
 export class PageIngredients extends Component {
@@ -27,19 +28,19 @@ export class PageIngredients extends Component {
     }
 
     render() {
-        const liste = this.ingrList.list.length;
         const body = (this.state.ingrSelected === null?
             <div className="IngredientListDiv">
                 {this.ingrList.list.map((ingr, _) => {
                     return <Ingredient ingr={ingr} select={this.selectIngr}/>
                 })}
+                <Ingredient ingr={{name: "add"}} select={this.selectIngr}/>
             </div>
             :<IngredientModif ingr={this.state.ingrSelected} saveChange={this.saveChange}/>
         )
 
         return (
             <div id="PageIngredientDiv">
-                <BoutonRetour />
+                <BoutonRetour visible={this.state.ingrSelected == null}/>
                 <header className="HeaderBar">
                     <div>Ingrédients</div>
                 </header>

@@ -22,7 +22,7 @@
 }
 
 .HeaderBar {
-  background-color: var(--header-color);
+  background-color: var(--header-bar);
   height: 10vh;
   width: 100vw;
 

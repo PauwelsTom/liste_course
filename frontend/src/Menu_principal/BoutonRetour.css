@@ -21,10 +21,11 @@
     transition: ease 0.5s;
 
     cursor: pointer;
+    text-decoration: none;
+    cursor: default;
 }
 
 .BoutonRetourDiv:hover {
     background-color: var(--bouton-retour);
-    color: var(--header-color);
-
+    color: var(--header-bar);
 }

@@ -14,7 +14,7 @@ export class Ingredient extends Component {
                 <div className="IngredientEssential">
                     <span className="IngrName">{this.ingr.name}</span>
                     <span className="IngrType">{this.ingr.type}</span>
-                    <span>{"Mesure: " + this.ingr.mesure}</span>
+                    <span>{this.ingr.name === "add"? "": "Mesure: " + this.ingr.mesure}</span>
                 </div>
                 <span className="IngrDescription">
                     {this.ingr.description}

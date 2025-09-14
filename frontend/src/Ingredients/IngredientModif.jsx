@@ -7,19 +7,23 @@ import { Component } from "react";
 export class IngredientModif extends Component {
     constructor(props) {
         super();
+        this.ingr = props.ingr;
+        if (this.ingr["name"] === "add") {
+            this.ingr = new IngredientClass("add");
+        }
     }
 
-    componentDidMount() {
+    componentDidMount() {        
         // Rentrer tous les arguments dans les champs de texte
-        this.props.ingr.get_attribute_list().map((attr, _) => {
-            document.getElementById("Modif" + attr).value = this.props.ingr[attr];
+        this.ingr.get_attribute_list().map((attr, _) => {
+            document.getElementById("Modif" + attr).value = (this.ingr.name === "add"? "": this.ingr[attr]);
         });
     }
 
     get_ingr = () => {
         // On récupère tous les éléments pour faire un ingrédient
         let ingr = {};
-        this.props.ingr.get_attribute_list().map((attr, _) => {
+        this.ingr.get_attribute_list().map((attr, _) => {
             ingr[attr] = document.getElementById("Modif" + attr).value;
         });
         const res = new IngredientClass(ingr.name);
@@ -27,11 +31,15 @@ export class IngredientModif extends Component {
         return res;
     }
 
+    save = (succes) => {
+        this.props.saveChange(succes, this.get_ingr());
+    }
+
     render() {
         return (
             <div className="IngredientModifDiv">
                 
-                {this.props.ingr.get_attribute_list().map((attr, index) => (
+                {this.ingr.get_attribute_list().map((attr, index) => (
                     <div className="ChampTexte">
                         <span className="LabelIngrModif">{attr}</span>
                         <input className="InputIngrModif" id={"Modif" + attr} type="text"/>
@@ -39,8 +47,8 @@ export class IngredientModif extends Component {
                 ))}
 
                 <div className="BoutonValiderRetourDiv">
-                    <button onClick={() => this.props.saveChange(false)}>Retour</button>
-                    <button onClick={() => this.props.saveChange(true, this.get_ingr())}>Valider</button>
+                    <button onClick={() => this.save(false)}>Retour</button>
+                    <button onClick={() => this.save(true)}>Valider</button>
                 </div>
 
                 

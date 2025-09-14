@@ -2,6 +2,10 @@
     background-color: var(--background-color);
 }
 
+.Hidden {
+    display: none;
+}
+
 .IngredientListDiv {
 
 }
