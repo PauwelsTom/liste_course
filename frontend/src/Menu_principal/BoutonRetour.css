@@ -1,0 +1,30 @@
+.BoutonRetourDiv{
+    position: absolute;
+
+    top: 6vh;
+    left: 2vh;
+    
+    height: 6vh;
+    width: 6vh;
+
+    border: 1vh solid var(--bouton-retour);
+    border-radius: 8vh;
+
+    font-size: 5vh;
+    font-weight: 800;
+    color: var(--bouton-retour);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: ease 0.5s;
+
+    cursor: pointer;
+}
+
+.BoutonRetourDiv:hover {
+    background-color: var(--bouton-retour);
+    color: var(--header-color);
+
+}

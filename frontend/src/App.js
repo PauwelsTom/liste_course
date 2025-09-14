@@ -7,6 +7,7 @@ import { PageFoyer } from './Foyer/PageFoyer';
 import { PageListe } from './Liste/PageListe';
 import { PageMagasin } from './Magasin/PagMagasin';
 import { PageRecette } from './Recette/PageRecette';
+import { PageIngredients } from './Ingredients/PageIngredients';
 
 class App extends Component {
 
@@ -22,6 +23,7 @@ class App extends Component {
                     <Route path='/liste' element={<PageListe />}/>
                     <Route path='/magasin' element={<PageMagasin />}/>
                     <Route path='/recette' element={<PageRecette />}/>
+                    <Route path='/ingredients' element={<PageIngredients />}/>
                     <Route path='/foyer' element={<PageFoyer />} />
                 </Routes>
             </Router>

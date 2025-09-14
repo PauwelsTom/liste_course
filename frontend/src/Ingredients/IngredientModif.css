@@ -1,0 +1,68 @@
+.IngredientModifDiv {
+    background-color: var(--background-color);
+    width: 100vw;
+    height: 75vh;
+    padding-bottom: 10vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ChampTexte {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.LabelIngrModif {
+    font-size: 2.5vh;
+    margin-left: 1vw;
+    color: gray;
+    font-weight: 600;
+}
+
+.InputIngrModif {
+    font-size: 2vh;
+    padding-top: 0.5vh;
+    border: 0px;
+    border-bottom: 1px solid lightgray;
+
+    transition: ease 0.5s;
+}
+
+.InputIngrModif:hover {
+    border-bottom: 1px solid gray;
+}
+
+.InputIngrModif:focus {
+    border: 0px; /* Enlever le contour noir degueu */
+    border-bottom: 1px solid gray;
+    outline: none;
+}
+
+.BoutonValiderRetourDiv {
+    width: 80vw;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.BoutonValiderRetourDiv button {
+    padding: 2vh;
+    
+    border: 1px solid lightgray;
+    border-radius: 5vh;
+
+    font-size: 3vh;
+
+    transition: ease 0.5s;
+}
+
+.BoutonValiderRetourDiv button:hover {
+    cursor: pointer;
+
+    background-color: lightgray;
+    border: 1px solid gray;
+}
