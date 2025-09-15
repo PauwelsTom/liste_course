@@ -17,7 +17,7 @@ export class PageIngredients extends Component {
         this.foyer = 0;
     }
 
-    get_all_ingr = (retry=false) => {
+    get_all_ingr = () => {
         fetch("http://127.0.0.1:8000/ingredients/" + this.foyer.toString())
             .then(response => {
                 if (!response.ok)
