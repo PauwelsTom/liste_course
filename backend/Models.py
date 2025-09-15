@@ -10,3 +10,4 @@ class Ingr(Base):
     mesure = Column(String, nullable=True)
     description = Column(String, nullable=True)
     image = Column(String, nullable=True)
+    foyer = Column(Integer, nullable=True)

@@ -1,6 +1,11 @@
+import { IngredientClass } from "./Ingredient";
+
 export class ListeIngredients {
-    constructor(l=[]) {
-        this.list = l;
+    constructor(l) {
+        this.list = [];
+        for (let i = 0; i < l.length; i++) {
+            this.list.push(new IngredientClass(l[i]));
+        }
     }
 
     add = (ingr) => {
@@ -32,7 +37,7 @@ export class ListeIngredients {
         return res;
     }
 
-    get_ingredients_list = (index) => {
-        return this.list[index];
-    }
+    // get_ingredients_list = (index) => {
+    //     return this.list[index];
+    // }
 }

@@ -10,13 +10,14 @@ export class IngredientModif extends Component {
         this.ingr = props.ingr;
         if (this.ingr["name"] === "add") {
             this.ingr = new IngredientClass("add");
+            this.add = true;
         }
     }
 
     componentDidMount() {        
         // Rentrer tous les arguments dans les champs de texte
         this.ingr.get_attribute_list().map((attr, _) => {
-            document.getElementById("Modif" + attr).value = (this.ingr.name === "add"? "": this.ingr[attr]);
+            document.getElementById("Modif" + attr).value = (this.add? "": this.ingr[attr]);
         });
     }
 

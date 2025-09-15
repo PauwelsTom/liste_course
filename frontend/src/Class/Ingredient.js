@@ -1,6 +1,8 @@
 export class IngredientClass {
-    constructor(name) {
-        this.name = name;
+    constructor(ingr) {
+        this.get_attribute_list().map((attr, _) => {
+            this[attr] = ingr[attr];
+        });
     }
 
     build_ingr = (ingr) => {
@@ -23,5 +25,13 @@ export class IngredientClass {
 
     get_attribute_list = () => {
         return ["name", "type", "mesure", "description", "image"];
+    }
+
+    to_json = () => {
+        const res = {};
+        this.get_attribute_list().map((attr, _) => {
+            res[attr] = this[attr];
+        })
+        return res;
     }
 }

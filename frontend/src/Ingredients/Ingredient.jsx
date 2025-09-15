@@ -10,7 +10,7 @@ export class Ingredient extends Component {
 
     render() {
         return (
-            <div className="IngredientDiv" onClick={() => this.props.select(this.ingr)}>
+            <div className="IngredientDiv" key={this.ingr.name} onClick={() => this.props.select(this.ingr)}>
                 <div className="IngredientEssential">
                     <span className="IngrName">{this.ingr.name}</span>
                     <span className="IngrType">{this.ingr.type}</span>
