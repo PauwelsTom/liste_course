@@ -1,37 +1,30 @@
 export class IngredientClass {
     constructor(ingr) {
-        this.get_attribute_list().map((attr, _) => {
-            this[attr] = ingr[attr];
-        });
+        this.attribute_list_form = ["name", "type", "mesure", "description", "image"];
+        
+        this.name = ingr.name;
+        this.type = ingr.type;
+        this.mesure = ingr.mesure;
+        this.description = ingr.description;
+        this.image = ingr.image;
     }
-
-    build_ingr = (ingr) => {
-        this.get_attribute_list().map((attr, _) => {
-            this[attr] = ingr[attr];
-        });
-    }
-
-    // TODO: Fais une requête vers le backend pour récupérer le descriptif
-    get_full_ingr = (foyer=-1) => {
-        this.description = "TODO: description";
-        this.type = "Viande"
-        this.mesure = "g";
-        this.image = "";
-
-        this.used_in = "";
-        this.afficher = true;
-        this.quantite = 0;
-    }
-
-    get_attribute_list = () => {
-        return ["name", "type", "mesure", "description", "image"];
-    }
-
+    
     to_json = () => {
         const res = {};
-        this.get_attribute_list().map((attr, _) => {
+        this.attribute_list_form.map((attr, _) => {
             res[attr] = this[attr];
         })
         return res;
     }
+}
+
+
+export function json_to_ingrList(json) {
+    if (!json || !Array.isArray(json)) {
+        return [];
+    }
+
+    return json.map(ingr => {
+        return new IngredientClass(ingr);
+    });
 }

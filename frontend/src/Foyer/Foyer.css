@@ -1,0 +1,32 @@
+.FoyerDiv {
+    width: 100vw;
+    height: 10vh;
+
+    border-bottom: 1px solid lightgray;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.FoyerImage {
+    width: 10vh;
+    min-width: 10vh;
+    height: 10vh;
+}
+
+.FoyerName {
+    width: 30vw;
+    min-width: 30vw;
+
+    font-size: 2.2vh;
+    font-weight: 500;
+    text-align: center;
+}
+
+.FoyerDescription {
+    text-align: center;
+    color: gray;
+}
+

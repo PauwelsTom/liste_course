@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from typing import List
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-import Models, Schemas, Crud
+import Schemas, Crud
 from database import SessionLocal, engine, Base
 
 # Crée les tables
@@ -32,9 +31,9 @@ def get_db():
 def root():
     return {"message": "Bienvenue dans l'API liste de courses 🚀"}
 
-@app.put("/ingredients/{foyer}", response_model=Schemas.Ingr)
-def update_ingredient_route(foyer: int, ingrName: str, db: Session = Depends(get_db)):
-    return Crud.delete_ingredient(db=db, ingrName=ingrName, foyer=foyer)
+@app.delete("/ingredients/{foyer}", response_model=bool)
+def update_ingredient_route(foyer: int, ingredient: Schemas.IngrCreate, db: Session = Depends(get_db)):
+    return Crud.delete_ingredient(db=db, ingr=ingredient, foyer=foyer)
 
 @app.put("/ingredients/{foyer}", response_model=Schemas.Ingr)
 def update_ingredient_route(foyer: int, ingredient: Schemas.IngrCreate, db: Session = Depends(get_db)):
@@ -51,8 +50,3 @@ def get_ingredients_route(foyer: int, db: Session = Depends(get_db)):
 @app.get("/ingredient/{ingr_name}", response_model=Schemas.Ingr)
 def get_ingredient_by_name_route(ingr_name: str, db: Session = Depends(get_db)):
     return Crud.get_ingredient_by_name(db, ingr_name)
-
-@app.delete("/ingredients/{item_id}")
-def delete_ingredient_route(item_id: int, db: Session = Depends(get_db)):
-    success = Crud.delete_ingredient(db, item_id)
-    return {"deleted": success}

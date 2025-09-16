@@ -1,0 +1,18 @@
+.FoyerListDiv {
+    width: 100vh;
+    height: 85vh;
+}
+
+.WarningSelected {
+    width: 100vw;
+    height: 8vh;
+
+    font-size: 3.5vh;
+    font-weight: 600;
+    color: red;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

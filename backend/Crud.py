@@ -49,8 +49,8 @@ def update_ingr(db: Session, ingr: Schemas.IngrCreate, foyer: int):
     return db_ingr
 
 
-def delete_ingredient(db: Session, ingrName: str, foyer: int):
-    ingr = db.query(Models.Ingr).filter(Models.Ingr.name == ingrName, Models.Ingr.foyer == foyer).first()
+def delete_ingredient(db: Session, ingr: Schemas.IngrCreate, foyer: int):
+    ingr = db.query(Models.Ingr).filter(Models.Ingr.name == ingr.name, Models.Ingr.foyer == foyer).first()
     if ingr:
         db.delete(ingr)
         db.commit()

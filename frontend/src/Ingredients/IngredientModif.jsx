@@ -8,17 +8,12 @@ export class IngredientModif extends Component {
     constructor(props) {
         super();
         this.ingr = props.ingr;
-        if (this.ingr["name"] === "add") {
-            this.ingr = new IngredientClass("add");
-            this.add = true;
-        } else {
-            this.add = false;
-        }
+        this.add = this.ingr["name"] === "add";
     }
 
-    componentDidMount() {        
+    componentDidMount() {
         // Rentrer tous les arguments dans les champs de texte
-        this.ingr.get_attribute_list().map((attr, _) => {
+        this.ingr.attribute_list_form.map((attr, _) => {
             document.getElementById("Modif" + attr).value = (this.add? "": this.ingr[attr]);
         });
     }
@@ -26,23 +21,25 @@ export class IngredientModif extends Component {
     get_ingr = () => {
         // On récupère tous les éléments pour faire un ingrédient
         let ingr = {};
-        this.ingr.get_attribute_list().map((attr, _) => {
+        this.ingr.attribute_list_form.map((attr, _) => {
             ingr[attr] = document.getElementById("Modif" + attr).value;
         });
-        const res = new IngredientClass(ingr.name);
-        res.build_ingr(ingr);
-        return res;
+        return new IngredientClass(ingr);
     }
 
     save = (succes) => {
         this.props.saveChange(succes, this.add, this.get_ingr());
     }
 
+    suppr = () => {
+        this.props.suppr(this.get_ingr());
+    }
+
     render() {
         return (
             <div className="IngredientModifDiv">
                 
-                {this.ingr.get_attribute_list().map((attr, index) => (
+                {this.ingr.attribute_list_form.map((attr, index) => (
                     <div key={index} className="ChampTexte">
                         <span className="LabelIngrModif">{attr}</span>
                         <input className="InputIngrModif" id={"Modif" + attr} type="text"/>
@@ -55,7 +52,10 @@ export class IngredientModif extends Component {
                 </div>
 
                 <div className="BoutonValiderRetourDiv">
-                    <button onClick={() => this.props.suppr(this.get_ingr())}>Supprimer</button>
+                    {
+                        this.add? ""
+                        :<button onClick={this.suppr}>Supprimer</button>
+                    }
                 </div>
 
                 
