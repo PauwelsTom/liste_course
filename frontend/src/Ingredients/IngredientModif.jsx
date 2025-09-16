@@ -11,6 +11,8 @@ export class IngredientModif extends Component {
         if (this.ingr["name"] === "add") {
             this.ingr = new IngredientClass("add");
             this.add = true;
+        } else {
+            this.add = false;
         }
     }
 
@@ -33,7 +35,7 @@ export class IngredientModif extends Component {
     }
 
     save = (succes) => {
-        this.props.saveChange(succes, this.get_ingr());
+        this.props.saveChange(succes, this.add, this.get_ingr());
     }
 
     render() {

@@ -36,15 +36,19 @@ export class PageIngredients extends Component {
         this.setState({ingrSelected: ingr});
     }
 
-    saveChange = (save, ingr=null) => {
+    saveChange = (save, newIngr=true, ingr=null) => {
         // TODO: envoie vers le backend le nouvel élément
         if (save) {
-            console.log("requête update backend");
-            console.log(ingr.to_json());
-
+            let typeRequete = "";
+            if (newIngr) {
+                typeRequete = "POST";
+            } else {
+                typeRequete = "PUT";
+            }
+            alert(typeRequete);
             //? Requête POST vers /ingredients/
             fetch("http://127.0.0.1:8000/ingredients/" + this.foyer.toString(), {
-                method: 'POST',
+                method: typeRequete,
                 headers: {
                     'Content-Type': 'application/json'
                 },

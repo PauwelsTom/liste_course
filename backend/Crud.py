@@ -23,6 +23,22 @@ def create_ingredient(db: Session, ingr: Schemas.IngrCreate, foyer: int):
     db.refresh(db_ingr)
     return db_ingr
 
+def update_ingr(db: Session, ingr: Schemas.IngrCreate, foyer: int):
+    db_ingr = db.query(Models.Ingr).filter(Models.Ingr.name == ingr.name, Models.Ingr.foyer == foyer).first()
+    
+    if not db_ingr:
+        return None  # ou tu peux lever une exception HTTPException(status_code=404)
+
+    db_ingr.type = ingr.type
+    db_ingr.mesure = ingr.mesure
+    db_ingr.description = ingr.description
+    db_ingr.image = ingr.image
+    db_ingr.foyer = foyer  # utile si le foyer peut changer
+
+    db.commit()
+    db.refresh(db_ingr)
+    return db_ingr
+
 
 def delete_ingredient(db: Session, item_id: int):
     ingr = db.query(Models.Ingr).filter(Models.Ingr.id == item_id).first()
