@@ -3,7 +3,7 @@ import { IngredientClass } from "../Class/Ingredient";
 import "./IngredientModif.css"
 import { Component } from "react";
 
-// ingr
+// ingr, saveChange, 
 export class IngredientModif extends Component {
     constructor(props) {
         super();
@@ -43,7 +43,7 @@ export class IngredientModif extends Component {
             <div className="IngredientModifDiv">
                 
                 {this.ingr.get_attribute_list().map((attr, index) => (
-                    <div className="ChampTexte">
+                    <div key={index} className="ChampTexte">
                         <span className="LabelIngrModif">{attr}</span>
                         <input className="InputIngrModif" id={"Modif" + attr} type="text"/>
                     </div>
@@ -52,6 +52,10 @@ export class IngredientModif extends Component {
                 <div className="BoutonValiderRetourDiv">
                     <button onClick={() => this.save(false)}>Retour</button>
                     <button onClick={() => this.save(true)}>Valider</button>
+                </div>
+
+                <div className="BoutonValiderRetourDiv">
+                    <button onClick={() => this.props.suppr(this.get_ingr())}>Supprimer</button>
                 </div>
 
                 

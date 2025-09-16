@@ -33,6 +33,10 @@ def root():
     return {"message": "Bienvenue dans l'API liste de courses 🚀"}
 
 @app.put("/ingredients/{foyer}", response_model=Schemas.Ingr)
+def update_ingredient_route(foyer: int, ingrName: str, db: Session = Depends(get_db)):
+    return Crud.delete_ingredient(db=db, ingrName=ingrName, foyer=foyer)
+
+@app.put("/ingredients/{foyer}", response_model=Schemas.Ingr)
 def update_ingredient_route(foyer: int, ingredient: Schemas.IngrCreate, db: Session = Depends(get_db)):
     return Crud.update_ingr(db=db, ingr=ingredient, foyer=foyer)
 
