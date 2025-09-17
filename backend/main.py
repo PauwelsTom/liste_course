@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, Depends
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 
-import Schemas, Crud
 from database import SessionLocal, engine, Base
+import Endpoints.Ingredients
+import Endpoints.Foyer
 
 # Crée les tables
 Base.metadata.create_all(bind=engine)
@@ -31,22 +31,5 @@ def get_db():
 def root():
     return {"message": "Bienvenue dans l'API liste de courses 🚀"}
 
-@app.delete("/ingredients/{foyer}", response_model=bool)
-def update_ingredient_route(foyer: int, ingredient: Schemas.IngrCreate, db: Session = Depends(get_db)):
-    return Crud.delete_ingredient(db=db, ingr=ingredient, foyer=foyer)
-
-@app.put("/ingredients/{foyer}", response_model=Schemas.Ingr)
-def update_ingredient_route(foyer: int, ingredient: Schemas.IngrCreate, db: Session = Depends(get_db)):
-    return Crud.update_ingr(db=db, ingr=ingredient, foyer=foyer)
-
-@app.post("/ingredients/{foyer}", response_model=Schemas.Ingr)
-def create_ingredient_route(foyer: int, ingredient: Schemas.IngrCreate, db: Session = Depends(get_db)):
-    return Crud.create_ingredient(db=db, ingr=ingredient, foyer=foyer)
-
-@app.get("/ingredients/{foyer}", response_model=list[Schemas.Ingr])
-def get_ingredients_route(foyer: int, db: Session = Depends(get_db)):
-    return Crud.get_ingredients(db, foyer)
-
-@app.get("/ingredient/{ingr_name}", response_model=Schemas.Ingr)
-def get_ingredient_by_name_route(ingr_name: str, db: Session = Depends(get_db)):
-    return Crud.get_ingredient_by_name(db, ingr_name)
+Endpoints.Ingredients.all(app, get_db)
+Endpoints.Foyer.all(app, get_db)

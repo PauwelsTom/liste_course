@@ -1,25 +1,26 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
-import Models, Schemas
+import Models.Ingredients
+import Schemas.Ingredients
 from Functions import *
 
 def get_ingredients(db: Session, foyer: int):
-    return db.query(Models.Ingr).filter(Models.Ingr.foyer == foyer).all()
+    return db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.foyer == foyer).all()
 
 # TODO: fix celle là
 def get_ingredient_by_name(db: Session, ingr_name: str):
     print(f"Ingr requested: {ingr_name}")
-    return db.query(Models.Ingr).filter(Models.Ingr.name == ingr_name).first()
+    return db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.name == ingr_name).first()
 
-def create_ingredient(db: Session, ingr: Schemas.IngrCreate, foyer: int):
+def create_ingredient(db: Session, ingr: Schemas.Ingredients.IngrCreate, foyer: int):
     if ingr_already_exist(db=db, ingrName=ingr.name, foyer=foyer):
         raise HTTPException(
             status_code=400,
             detail=f"L'ingrédient '{ingr.name}' existe déjà dans votre foyer."
         )
     
-    db_ingr = Models.Ingr(
+    db_ingr = Models.Ingredients.Ingr(
         name=ingr.name,
         type=ingr.type,
         mesure=ingr.mesure,
@@ -32,8 +33,8 @@ def create_ingredient(db: Session, ingr: Schemas.IngrCreate, foyer: int):
     db.refresh(db_ingr)
     return db_ingr
 
-def update_ingr(db: Session, ingr: Schemas.IngrCreate, foyer: int):
-    db_ingr = db.query(Models.Ingr).filter(Models.Ingr.name == ingr.name, Models.Ingr.foyer == foyer).first()
+def update_ingr(db: Session, ingr: Schemas.Ingredients.IngrCreate, foyer: int):
+    db_ingr = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.name == ingr.name, Models.Ingredients.Ingr.foyer == foyer).first()
     
     if not db_ingr:
         return None  # ou tu peux lever une exception HTTPException(status_code=404)
@@ -49,8 +50,8 @@ def update_ingr(db: Session, ingr: Schemas.IngrCreate, foyer: int):
     return db_ingr
 
 
-def delete_ingredient(db: Session, ingr: Schemas.IngrCreate, foyer: int):
-    ingr = db.query(Models.Ingr).filter(Models.Ingr.name == ingr.name, Models.Ingr.foyer == foyer).first()
+def delete_ingredient(db: Session, ingr: Schemas.Ingredients.IngrCreate, foyer: int):
+    ingr = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.name == ingr.name, Models.Ingredients.Ingr.foyer == foyer).first()
     if ingr:
         db.delete(ingr)
         db.commit()
