@@ -17,7 +17,7 @@ def all(app, get_db):
     def update_foyer(foyer: Schemas.Foyer.FoyerUpdate, db: Session = Depends(get_db)):
         return Crud.Foyer.update_foyer(db=db, foyer=foyer)
     
-    @app.delete("/foyer/", response_model=Schemas.Foyer.Foyer)
+    @app.delete("/foyer/", response_model=bool)
     def delete_foyer(foyer: Schemas.Foyer.FoyerDelete, db: Session = Depends(get_db)):
         return Crud.Foyer.delete_foyer(db=db, foyer=foyer)
     
