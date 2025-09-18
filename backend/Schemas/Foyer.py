@@ -3,7 +3,6 @@ from pydantic import BaseModel
 class FoyerBase(BaseModel):
     name: str
     description: str
-    image: str
 
 class FoyerCreate(FoyerBase):
     pass

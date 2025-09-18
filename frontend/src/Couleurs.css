@@ -3,4 +3,9 @@
     --bouton-retour: black;
     --background-color: #ffffff;
     --header-bar: #cccccc;
+
+    --foyer: white;
+    --foyer-hover: #eeeeee;
+    --foyer-selected: #80feb7;
+    --foyer-selected-hover: #77e2a5;
 }

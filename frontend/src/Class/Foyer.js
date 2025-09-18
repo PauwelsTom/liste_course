@@ -1,7 +1,8 @@
 export class FoyerClass {
     constructor(foy) {
         this.attribute_list = ["id", "name", "description", "image"];
-        
+        this.attribute_list_form = ["name", "description"];
+
         this.id = foy.id
         this.name = foy.name
         this.description = foy.description
@@ -19,7 +20,7 @@ export class FoyerClass {
 
 
 export function json_to_foyerList(json) {
-    if (!json || !Array.isArray(json)) {
+    if (!json || !Array.isArray(json) || json.length === 0) {
         return [];
     }
 

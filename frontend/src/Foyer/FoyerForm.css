@@ -1,0 +1,78 @@
+.FoyerForm{
+    width: 90vw;
+    height: 10vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    transition: 0.5s ease;
+
+    opacity: 1;
+}
+
+.ColonneBoutonFoyer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ChampTexte {
+    height: 100%;
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ChampTexte span{
+    width: 80%;
+    text-align: start;
+}
+
+.ChampTexte input{
+    width: 80%;
+    font-size: 2vh;
+    padding-top: 0.5vh;
+    border: 0px;
+    border-bottom: 1px solid lightgray;
+
+    transition: ease 0.5s;
+}
+
+.ChampTexte input:hover {
+    border-bottom: 1px solid gray;
+}
+
+.ChampTexte input:focus {
+    border: 0px; /* Enlever le contour noir degueu */
+    border-bottom: 1px solid gray;
+    outline: none;
+}
+
+button{
+    padding: 1vh;
+    
+    border: 1px solid lightgray;
+    border-radius: 5vh;
+
+    font-size: 1.5vh;
+
+    transition: ease 0.5s;
+}
+
+button:hover {
+    cursor: pointer;
+
+    background-color: lightgray;
+    border: 1px solid gray;
+}
+
+.SupprFoyer {
+    background-color: red;
+}

@@ -19,7 +19,7 @@ def create_foyer(db: Session, foyer: Schemas.Foyer.FoyerCreate):
     db_foyer = Models.Foyer.Foyer(
         name=foyer.name,
         description=foyer.description,
-        image=foyer.image,
+        image=None,
     )
     db.add(db_foyer)
     db.commit()
@@ -34,7 +34,7 @@ def update_foyer(db: Session, foyer: Schemas.Foyer.FoyerUpdate):
 
     db_foyer.name = foyer.name
     db_foyer.description = foyer.description
-    db_foyer.image = foyer.image
+    db_foyer.image = None
 
     db.commit()
     db.refresh(db_foyer)

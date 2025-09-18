@@ -1,19 +1,44 @@
 .FoyerDiv {
+    background-color: var(--foyer);
+    border-bottom: 1px solid lightgray;
+
+    transition: 0.5s ease;
+}
+
+.FoyerInfoDiv {
     width: 100vw;
     height: 10vh;
-
-    border-bottom: 1px solid lightgray;
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    transition: 0.5s ease;
+}
+
+.FoyerDiv:hover {
+    background-color: var(--foyer-hover);
+}
+
+.FoyerSelected:hover {
+    background-color: var(--foyer-selected-hover) !important;
 }
 
 .FoyerImage {
-    width: 10vh;
-    min-width: 10vh;
-    height: 10vh;
+    width: 6vh;
+    min-width: 6vh;
+    height: 6vh;
+    padding: 2vh;
+
+    transition: ease 0.5s;
+}
+
+.FoyerImage:hover {
+    width: 7vh;
+    min-width: 7vh;
+    height: 7vh;
+    padding: 1.5vh;
 }
 
 .FoyerName {
@@ -30,3 +55,6 @@
     color: gray;
 }
 
+.FoyerSelected {
+    background-color: var(--foyer-selected);
+}
