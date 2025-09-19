@@ -32,7 +32,7 @@
     height: 12vh;
 
     background-color: var(--couleur-menu-princpal);
-    color: white;
+    color: var(--background-color);
 }
 
 .BoutonFlèche {
@@ -48,4 +48,18 @@
     font-size: 5vh;
     font-weight: 600;
     color: var(--couleur-menu-princpal);
+}
+
+.Disabled {
+    border: 1vh solid lightgray;
+    color: lightgray;
+}
+
+.Disabled:hover {
+    height: 8vh;
+    width: 80vw;
+
+    background-color: var(--background-color);
+    border: 1vh solid lightgray;
+    color: lightgray;
 }

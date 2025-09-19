@@ -7,12 +7,16 @@ export class BoutonMode extends Component {
     constructor(props) {
         super();
         this.name = props.name;
-        this.link = props.link;
+        this.link = props.disable? "/": props.link;
+    }
+
+    get_class = () => {
+        return "BoutonModeDiv " + (this.props.disable? "Disabled": "");
     }
 
     render() {
         return (
-            <Link className="BoutonModeDiv" to={this.link}>
+            <Link className={this.get_class()} to={this.link}>
                 {this.name}
             </Link>
         );

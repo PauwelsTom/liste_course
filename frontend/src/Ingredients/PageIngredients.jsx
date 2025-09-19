@@ -13,7 +13,9 @@ export class PageIngredients extends Component {
             ingrSelected: null,
             ingrList: []
         }
-        this.foyer = 0;
+
+        const foyer = parseInt(localStorage.getItem("foyer"));
+        this.foyer = isNaN(foyer)? null: foyer;
     }
 
     get_all_ingr = () => {

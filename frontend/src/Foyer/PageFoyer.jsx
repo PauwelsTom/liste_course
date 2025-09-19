@@ -56,9 +56,15 @@ export class PageFoyer extends Component {
                 const res = json_to_foyerList(json);
                 console.log(res);
                 this.setState({foyers: res});
-                setTimeout(() => {
-                    this.setState({foyers: res});
-                }, 1000);
+                
+                if (this.state.selected != null) {
+                    for (const i = 0; i < res.length; i++) {
+                        if (res[i].id === this.state.selected)
+                            return;
+                    }
+                    this.setState({selected: null});
+                    localStorage.setItem("foyer", null);
+                }
             })
             .catch(e => console.error("Erreur lors de la requête:", e))
     }

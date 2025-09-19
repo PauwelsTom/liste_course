@@ -42,9 +42,12 @@ def update_foyer(db: Session, foyer: Schemas.Foyer.FoyerUpdate):
 
 
 def delete_foyer(db: Session, foyer: Schemas.Foyer.FoyerDelete):
-    foyer = db.query(Models.Foyer.Foyer).filter(Models.Foyer.Foyer.id == foyer.id).first()
+    foy = db.query(Models.Foyer.Foyer).filter(Models.Foyer.Foyer.id == foyer.id).first()
+    ingrFoyer = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.foyer == foyer.id).all()
     if foyer:
-        db.delete(foyer)
+        for ingr in ingrFoyer:
+            db.delete(ingr)
+        db.delete(foy)
         db.commit()
         return True
     return False
