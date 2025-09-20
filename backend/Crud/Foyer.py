@@ -4,6 +4,7 @@ from fastapi import HTTPException
 import Models.Foyer
 import Schemas.Foyer
 from Functions import *
+from Crud.Recette import delete_all_recette
 
 # GET all foyers
 def get_foyers(db: Session):
@@ -42,6 +43,7 @@ def update_foyer(db: Session, foyer: Schemas.Foyer.FoyerUpdate):
 
 
 def delete_foyer(db: Session, foyer: Schemas.Foyer.FoyerDelete):
+    delete_all_recette(db=db, foyer=foyer.id)
     foy = db.query(Models.Foyer.Foyer).filter(Models.Foyer.Foyer.id == foyer.id).first()
     ingrFoyer = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.foyer == foyer.id).all()
     if foyer:

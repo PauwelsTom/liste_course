@@ -61,7 +61,7 @@ export class Foyer extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state.foyer.to_json())
+            body: JSON.stringify({id: this.state.foyer.id})
         })
             .then(response => {
                 if (!response.ok)

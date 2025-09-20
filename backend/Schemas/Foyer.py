@@ -10,7 +10,7 @@ class FoyerCreate(FoyerBase):
 class FoyerUpdate(FoyerBase):
     id: int
 
-class FoyerDelete(FoyerBase):
+class FoyerDelete(BaseModel):
     id: int
 
 class Foyer(FoyerBase):

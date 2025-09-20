@@ -5,6 +5,10 @@ from fastapi import FastAPI
 from database import SessionLocal, engine, Base
 import Endpoints.Ingredients
 import Endpoints.Foyer
+import Endpoints.IngrRecette
+import Endpoints.Recette
+
+
 
 # Crée les tables
 Base.metadata.create_all(bind=engine)
@@ -33,3 +37,5 @@ def root():
 
 Endpoints.Ingredients.all(app, get_db)
 Endpoints.Foyer.all(app, get_db)
+Endpoints.IngrRecette.all(app, get_db)
+Endpoints.Recette.all(app, get_db)
