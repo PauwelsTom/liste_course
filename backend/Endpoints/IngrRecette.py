@@ -17,6 +17,6 @@ def all(app, get_db):
     def create_ingredient_recette_route(recette: int, ingredient: Schemas.IngrRecette.IngrRecetteCreate, db: Session = Depends(get_db)):
         return Crud.IngrRecette.create_ingr_recette(db=db, ingr=ingredient, recette=recette)
 
-    @app.get("/ingredients_recette/{recette}", response_model=list[Schemas.IngrRecette.IngrRecette], tags=["Ingrédient de recette"])
-    def get_ingredients_recette_route(recette: int, db: Session = Depends(get_db)):
+    @app.get("/ingredients_recette/{recette}", response_model=list[Schemas.IngrRecette.IngrRecetteDetail], tags=["Ingrédient de recette"])
+    def get_ingredients_from_recette(recette: int, db: Session = Depends(get_db)):
         return Crud.IngrRecette.get_from_recette(db, recette)

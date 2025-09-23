@@ -77,7 +77,7 @@ export class Foyer extends Component {
 
     render() {
         return (
-            <div key={this.state.foyer.name} className={this.foyer_class()}>
+            <div className={this.foyer_class()}>
                 <div className="FoyerInfoDiv" onClick={() => this.props.select(this.state.foyer.id)}>
                     <span className="FoyerName">{this.state.foyer.name}</span>
                     <span className="FoyerDescription">{this.state.foyer.description}</span>

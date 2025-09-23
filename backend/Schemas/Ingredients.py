@@ -10,6 +10,12 @@ class IngrBase(BaseModel):
 class IngrCreate(IngrBase):
     pass
 
+class IngrUpdate(IngrBase):
+    id: int
+
+class IngrDelete(BaseModel):
+    id: int
+
 class Ingr(IngrBase):
     id: int
 

@@ -1,0 +1,29 @@
+.RecetteDiv {
+    width: 100vw;
+    height: 10vh;
+    min-height: 10vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    border-bottom: 1px solid lightgray;
+
+    transition: 0.5s ease;
+}
+
+.RecetteDiv:hover {
+    background-color: var(--foyer-hover);
+}
+
+.RecetteName {
+    width: 30vw;
+    text-align: center;
+}
+
+.RecetteDescription {
+    width: 60vw;
+    color: gray;
+    text-align: center;
+}

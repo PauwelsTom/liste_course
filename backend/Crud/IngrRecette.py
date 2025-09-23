@@ -1,3 +1,4 @@
+import Models.Ingredients
 import Models.IngrRecette
 import Schemas.IngrRecette
 from sqlalchemy.orm import Session
@@ -6,7 +7,17 @@ from sqlalchemy.orm import Session
 # TODO: Create ingr, modify ingr, delete ingr, get ingr from recette
 
 def get_from_recette(db: Session, recette: int):
-    return db.query(Models.IngrRecette.IngrRecette).filter(Models.IngrRecette.IngrRecette.ref_recette == recette).all()
+    results = (
+        db.query(
+            Models.IngrRecette.IngrRecette.id,
+            Models.Ingredients.Ingr.name,
+            Models.IngrRecette.IngrRecette.quantite
+        )
+        .join(Models.Ingredients.Ingr, Models.IngrRecette.IngrRecette.ref_ingr == Models.Ingredients.Ingr.id)
+        .filter(Models.IngrRecette.IngrRecette.ref_recette == recette)
+        .all()
+    )
+    return results
 
 def create_ingr_recette(db: Session, ingr: Schemas.IngrRecette.IngrRecetteCreate, recette: int):
     db_ingr = Models.IngrRecette.IngrRecette(

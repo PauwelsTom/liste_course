@@ -1,0 +1,21 @@
+.ListeRecettesDiv {
+    
+}
+
+.AddRecetteLineDiv {
+    background-color: palegreen;
+    width: 100vw;
+    height: 10vh;
+    min-height: 10vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    transition: 0.5s ease;
+}
+
+.AddRecetteLineDiv:hover {
+    background-color: rgb(131, 222, 131);
+}

@@ -1,0 +1,65 @@
+.AddRecetteDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.RecetteCoreDiv {
+    height: 10vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.IngredientsRecetteDiv {
+    width: 100vw;
+    height: 60vh;
+    
+    display: flex;
+    flex-direction: column;
+
+}
+
+.IngredientTitle {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    
+    font-size: 3vh;
+    font-weight: 700;
+
+}
+
+.IngredientListeElement {
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.IngrNameListe {
+    font-size: 2vh;
+    font-weight: 500;
+}
+
+.BoutonSupprimer {
+    background-color: red;
+}
+
+.BoutonOkRecette {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+
+    padding: 1.5vh;
+    
+    font-size: 3vh;
+
+}
+
+.BoutonAjouterIngredient {
+    width: 90vw;
+    margin-left: 5vw;
+}

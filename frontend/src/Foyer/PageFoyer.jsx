@@ -21,8 +21,6 @@ export class PageFoyer extends Component {
     }
 
     create_foyer = (name, description) => {
-        // TODO: Faire le call API pour créer un foyer dans la db (faire le endpoint aussi)
-        alert(name + " - " + description);
         fetch("http://127.0.0.1:8000/foyer/", {
             method: "POST",
             headers: {
@@ -44,7 +42,6 @@ export class PageFoyer extends Component {
     }
 
     get_foyers = () => {
-        // TODO: Faire le call API pour récupérer les foyer
         fetch("http://127.0.0.1:8000/foyer/")
             .then(response => {
                 if (!response.ok)
@@ -54,7 +51,6 @@ export class PageFoyer extends Component {
             })
             .then(json => {
                 const res = json_to_foyerList(json);
-                console.log(res);
                 this.setState({foyers: res});
                 
                 if (this.state.selected != null) {
@@ -87,9 +83,9 @@ export class PageFoyer extends Component {
 
                 <div className="FoyerListDiv">
                     {
-                        this.state.foyers.map((foy, _) => {
+                        this.state.foyers.map((foy, index) => {
                             return (
-                                <Foyer foyer={foy} select={this.select_foyer} selected={this.state.selected} get_foyer={this.get_foyers}/>
+                                <Foyer key={index} foyer={foy} select={this.select_foyer} selected={this.state.selected} get_foyer={this.get_foyers}/>
                             );
                         })
                     }

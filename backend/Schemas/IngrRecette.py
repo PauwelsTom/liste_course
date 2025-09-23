@@ -15,6 +15,15 @@ class IngrRecetteUpdate(BaseModel):
 class IngrRecetteDelete(BaseModel):
     id: int
 
+class IngrRecetteDetail(BaseModel):
+    id: int
+    name: str
+    quantite: int
+
+    class Config:
+        from_attributes = True
+
+
 class IngrRecette(IngrRecetteBase):
     ref_recette: int
     id: int
