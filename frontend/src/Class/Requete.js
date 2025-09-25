@@ -253,4 +253,16 @@ export class RequeteClass {
         return res.json();
     }
 
+    // ! MA LISTE
+
+    get_items_ma_liste = async (recette, foyer, debug=false) => {
+        if (debug) { console.log("MA LISTE GET ITEMS\n\nRecette: ", recette, "\n\nFoyer: ", foyer); }
+        
+        if (recette) {
+            const res = await fetch(this.url + "/recette/" + foyer.toString());
+            return res.json()
+        }
+
+    }
+
 }

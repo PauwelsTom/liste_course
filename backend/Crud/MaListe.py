@@ -7,32 +7,40 @@ from Crud.IngrRecette import delete_all_ingr_recette
 def get_all_liste(db: Session, foyer: int):
     return db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.foyer == foyer).all()
 
+def liste_set_quantite(db: Session, liste: Schemas.MaListe.ListeUpdate):
+    db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.id == liste.id).first()
+ 
+    if not db_recette:
+        return None
+    
+    db_recette.quantite = liste.quantite
+
+    db.commit()
+    db.refresh(db_recette)
+    return db_recette
+
 def create_liste(db: Session, liste: Schemas.MaListe.ListeCreate, foyer: int):
-    db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.ref_ingr == liste.ref_ingr).first()
+    db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.ref == liste.ref and Models.MaListe.MaListe.recette == liste.recette).first()
     if db_recette:
-        db_recette.quantite += liste.quantite
-        db.commit()
-        db.refresh(db_recette)
-        return db_recette
+        return None
     
     db_liste = Models.MaListe.MaListe(
         foyer=foyer,
-        ref_ingr=liste.ref_ingr,
-        quantite=liste.quantite
+        ref=liste.ref,
+        recette=liste.recette
     )
     db.add(db_liste)
     db.commit()
     db.refresh(db_liste)
     return db_liste
 
-def update_liste(db: Session, liste: Schemas.MaListe.ListeUpdate):
+def liste_add_quantite(db: Session, liste: Schemas.MaListe.ListeUpdate):
     db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.id == liste.id).first()
 
     if not db_recette:
         return None
     
-    db_recette.ref_ingr = liste.ref_ingr
-    db_recette.quantite = liste.quantite
+    db_recette.quantite += liste.quantite
 
     db.commit()
     db.refresh(db_recette)
@@ -51,7 +59,7 @@ def check_liste(db: Session, liste_id: int, liste: Schemas.MaListe.ListeCheck):
     return db_recette
 
 def delete_liste(db: Session, liste: Schemas.MaListe.ListeDelete):
-    delete_all_ingr_recette(db=db, recette=liste.id)
+    # delete_all_ingr_recette(db=db, recette=liste.id)
     db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.id == liste.id).first()
     if db_recette:
         db.delete(db_recette)

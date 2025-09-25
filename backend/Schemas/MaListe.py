@@ -2,14 +2,15 @@
 from pydantic import BaseModel
 
 class ListeBase(BaseModel):
-    ref_ingr: int
+    id: int
     quantite: int
 
-class ListeCreate(ListeBase):
-    pass
+class ListeCreate(BaseModel):
+    ref: int
+    recette: bool
 
 class ListeUpdate(ListeBase):
-    id: int
+    pass
 
 class ListeDelete(BaseModel):
     id: int
@@ -18,8 +19,10 @@ class ListeCheck(BaseModel):
     check: bool
 
 class Liste(ListeBase):
-    id: int
     check: bool
+    ref: int
+    foyer: int
+    recette: bool
 
     class Config:
         from_attributes = True

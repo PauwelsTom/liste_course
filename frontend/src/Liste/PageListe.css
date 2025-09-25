@@ -1,0 +1,36 @@
+.ModeListeAjoutDiv {
+    background-color: var(--mode-liste);
+    width: 100vw;
+    height: 10vh;
+    padding-bottom: 5vh;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ModeListeAjout {
+    width: 50vw;
+    height: 10vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.ModeListeAjout:hover {
+    background-color: var(--mode-liste-hover);
+}
+
+.ModeListeAjoutSelected {
+    background-color: var(--mode-liste-selected) !important;
+}
+
+
+.MaListeBody {
+    width: 100vw;
+    height: 70vh;
+}
