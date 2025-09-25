@@ -24,6 +24,9 @@ export class IngredientModif extends Component {
         this.ingr.attribute_list_form.map((attr, _) => {
             ingr[attr] = document.getElementById("Modif" + attr).value;
         });
+        if (this.props.ingr.id != null) {
+            ingr["id"] = this.props.ingr.id;
+        }
         return new IngredientClass(ingr);
     }
 

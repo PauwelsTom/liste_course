@@ -5,13 +5,13 @@ from fastapi import Depends
 
 
 def all(app, get_db):
-    @app.delete("/ingredients/{foyer}", response_model=bool, tags=["Ingredients"])
-    def delete_ingredient_route(foyer: int, ingredient: Schemas.Ingredients.IngrDelete, db: Session = Depends(get_db)):
-        return Crud.Ingredients.delete_ingredient(db=db, ingr=ingredient, foyer=foyer)
+    @app.delete("/ingredients/", response_model=bool, tags=["Ingredients"])
+    def delete_ingredient_route(ingredient: Schemas.Ingredients.IngrDelete, db: Session = Depends(get_db)):
+        return Crud.Ingredients.delete_ingredient(db=db, ingr=ingredient)
 
-    @app.put("/ingredients/{foyer}", response_model=Schemas.Ingredients.Ingr, tags=["Ingredients"])
-    def update_ingredient_route(foyer: int, ingredient: Schemas.Ingredients.IngrUpdate, db: Session = Depends(get_db)):
-        return Crud.Ingredients.update_ingr(db=db, ingr=ingredient, foyer=foyer)
+    @app.put("/ingredients/", response_model=Schemas.Ingredients.Ingr, tags=["Ingredients"])
+    def update_ingredient_route(ingredient: Schemas.Ingredients.IngrUpdate, db: Session = Depends(get_db)):
+        return Crud.Ingredients.update_ingr(db=db, ingr=ingredient)
 
     @app.post("/ingredients/{foyer}", response_model=Schemas.Ingredients.Ingr, tags=["Ingredients"])
     def create_ingredient_route(foyer: int, ingredient: Schemas.Ingredients.IngrCreate, db: Session = Depends(get_db)):

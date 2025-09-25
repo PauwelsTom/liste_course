@@ -2,6 +2,7 @@ import { Component } from "react";
 import "./ListeRecettes.css"
 import { RecetteClass, json_to_recetteList } from "../Class/Recette";
 import { Recette } from "./Recette";
+import { RequeteClass } from "../Class/Requete";
 
 
 // visible, foyer
@@ -12,25 +13,16 @@ export class ListeRecettes extends Component {
             recettes: []
         }
         this.visible = props.visible;
+        this.req = new RequeteClass();
     }
 
     get_class = () => {
         return "ListeRecettesDiv " + (this.props.visible? "": "Hidden");
     }
 
-    get_all_recettes = () => {
-        fetch("http://127.0.0.1:8000/recette/" + this.props.foyer.toString())
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Problème lors de la connexion à l'API");
-
-                return response.json();
-            })
-            .then(json => {
-                this.setState({recettes: json_to_recetteList(json)});
-            })
-            .catch(e => console.error("Erreur lors de la requête:", e))
-        return;
+    get_all_recettes = async () => {
+        const res = await this.req.get_recettes(this.props.foyer.toString())
+        this.setState({recettes: json_to_recetteList(res)});
     }
 
     componentDidMount() {

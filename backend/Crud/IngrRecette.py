@@ -11,7 +11,8 @@ def get_from_recette(db: Session, recette: int):
         db.query(
             Models.IngrRecette.IngrRecette.id,
             Models.Ingredients.Ingr.name,
-            Models.IngrRecette.IngrRecette.quantite
+            Models.IngrRecette.IngrRecette.quantite,
+            Models.Ingredients.Ingr.mesure
         )
         .join(Models.Ingredients.Ingr, Models.IngrRecette.IngrRecette.ref_ingr == Models.Ingredients.Ingr.id)
         .filter(Models.IngrRecette.IngrRecette.ref_recette == recette)
@@ -58,3 +59,7 @@ def delete_all_ingr_recette(db: Session, recette: int):
         db.commit()
         return True
     return False
+
+def get_ingredient_count_recette(db: Session, ingr_id: int):
+    count = db.query(Models.IngrRecette.IngrRecette).filter(Models.IngrRecette.IngrRecette.ref_ingr == ingr_id).count()
+    return count

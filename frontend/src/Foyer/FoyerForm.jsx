@@ -15,12 +15,11 @@ export class FoyerForm extends Component {
     add_foyer = () => {
         const name = document.getElementById("foyerNameInput" + this.name).value;
         const description = document.getElementById("foyerDescriptionInput" + this.name).value;
-        this.props.add(name, description)
         if (this.name === "Add") {
             document.getElementById("foyerNameInput" + this.name).value = "";
             document.getElementById("foyerDescriptionInput" + this.name).value = "";
         }
-        this.props.changeMode();
+        this.props.add(name, description);
     }
 
     fill_fields = () => {

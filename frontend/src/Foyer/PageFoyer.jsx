@@ -2,8 +2,9 @@ import { BoutonRetour } from "../Menu_principal/BoutonRetour";
 import { Foyer } from "./Foyer";
 import "./PageFoyer.css"
 import { Component } from "react";
-import { json_to_foyerList } from "../Class/Foyer"
+import { FoyerClass, json_to_foyerList } from "../Class/Foyer"
 import { AddFoyer } from "./AddFoyer"
+import { RequeteClass } from "../Class/Requete";
 
 export class PageFoyer extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export class PageFoyer extends Component {
             foyers: [],
             selected: foyer == null? null: parseInt(foyer)
         }
+        this.req = new RequeteClass();
     }
 
     select_foyer = (foyer_id) => {
@@ -20,49 +22,24 @@ export class PageFoyer extends Component {
         localStorage.setItem("foyer", foyer_id);
     }
 
-    create_foyer = (name, description) => {
-        fetch("http://127.0.0.1:8000/foyer/", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({name: name, description: description})
-        })
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Problème lors de la connexion à l'API");
-
-                return response.json();
-            })
-            .then(json => {
-                this.get_foyers();
-            })
-            .catch(e => console.error("Erreur lors de la requête:", e))
-        return;
+    create_foyer = async (name, description) => {
+        const foy = new FoyerClass({name: name, description: description});
+        const res = await this.req.create_foyer(foy);
+        this.get_foyers()
     }
 
-    get_foyers = () => {
-        fetch("http://127.0.0.1:8000/foyer/")
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Problème lors de la connexion à l'API");
-
-                return response.json();
-            })
-            .then(json => {
-                const res = json_to_foyerList(json);
-                this.setState({foyers: res});
-                
-                if (this.state.selected != null) {
-                    for (const i = 0; i < res.length; i++) {
-                        if (res[i].id === this.state.selected)
-                            return;
-                    }
-                    this.setState({selected: null});
-                    localStorage.setItem("foyer", null);
-                }
-            })
-            .catch(e => console.error("Erreur lors de la requête:", e))
+    get_foyers = async () => {
+        const res = json_to_foyerList(await this.req.get_foyers());
+        this.setState({foyers: res});
+        
+        if (this.state.selected != null) {
+            for (let i = 0; i < res.length; i++) {
+                if (res[i].id === this.state.selected)
+                    return;
+            }
+            this.setState({selected: null});
+            localStorage.setItem("foyer", null);
+        }
     }
 
     componentDidMount() {

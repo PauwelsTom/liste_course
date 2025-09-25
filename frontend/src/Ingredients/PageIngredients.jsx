@@ -5,6 +5,7 @@ import "./PageIngredients.css"
 import "../Couleurs.css"
 import { Component } from "react";
 import { IngredientClass, json_to_ingrList } from "../Class/Ingredient";
+import { RequeteClass } from "../Class/Requete";
 
 export class PageIngredients extends Component {
     constructor(props) {
@@ -13,91 +14,51 @@ export class PageIngredients extends Component {
             ingrSelected: null,
             ingrList: []
         }
+        this.req = new RequeteClass();
 
         const foyer = parseInt(localStorage.getItem("foyer"));
         this.foyer = isNaN(foyer)? null: foyer;
     }
 
-    get_all_ingr = () => {
-        fetch("http://127.0.0.1:8000/ingredients/" + this.foyer.toString())
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Problème lors de la connexion à l'API");
-
-                return response.json();
-            })
-            .then(json => {
-                this.setState({ingrList: json_to_ingrList(json)});
-                console.log(json);
-            })
-            .catch(e => console.error("Erreur lors de la requête:", e))
+    get_all_ingr = async () => {
+        const res = await this.req.get_ingredients(this.foyer.toString());
+        this.setState({ingrList: json_to_ingrList(res)});
     }
 
     selectIngr = (ingr) => {
         this.setState({ingrSelected: ingr});
     }
 
-    saveChange = (save, newIngr=true, ingr=null) => {
+    saveChange = async (save, newIngr=true, ingr=null) => {
         if (save) {
             let typeRequete = "";
             if (newIngr) {
-                typeRequete = "POST";
+                const res = await this.req.create_ingredient(ingr, this.foyer.toString())
+                this.setState({ingrList: json_to_ingrList(res)});
             } else {
-                typeRequete = "PUT";
+                const res = await this.req.update_ingredient(ingr, this.foyer.toString())
+                this.setState({ingrList: json_to_ingrList(res)});
             }
-            fetch("http://127.0.0.1:8000/ingredients/" + this.foyer.toString(), {
-                method: typeRequete,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ingr)
-            })
-                .then(response => {
-                    if (!response.ok)
-                        throw new Error("Problème lors de la connexion à l'API");
-
-                    return response.json();
-                })
-                .then(json => {
-                    this.setState({ingrList: json_to_ingrList(json)});
-                })
-                .catch(e => alert("Erreur lors de la requête:" + e))
-                .finally(() => {
-                    this.setState({ingrSelected: null});
-                    this.get_all_ingr();
-                })
-        } else {
-            this.setState({ingrSelected: null});
-            this.get_all_ingr();
         }
+        this.setState({ingrSelected: null});
+        this.get_all_ingr();
     }
 
-    supprIngr = (ingr) => {
+    supprIngr = async (ingr) => {
         if (!window.confirm("Voulez vous supprimer l'ingrédient " + ingr.name + "?")) {
             return;
         }
 
-        fetch("http://127.0.0.1:8000/ingredients/" + this.foyer.toString(), {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(ingr)
-        })
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Problème lors de la connexion à l'API");
+        const count = await this.req.get_ingredient_recette_count(ingr.id);
 
-                return response.json();
-            })
-            .then(json => {
-                this.setState({ingrList: json_to_ingrList(json)});
-            })
-            .catch(e => alert("Erreur lors de la requête:" + e))
-            .finally(() => {
-                this.setState({ingrSelected: null});
-                this.get_all_ingr();
-            })
+        if (!window.confirm("L'ingrédient sera supprimé de " + count + " recette(s)")) {
+            return;
+        }
+
+        const res = await this.req.delete_ingredient(ingr);
+
+        this.setState({ingrSelected: null});
+        this.get_all_ingr();
     }
 
     componentDidMount() {

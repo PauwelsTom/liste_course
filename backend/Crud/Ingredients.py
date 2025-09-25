@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 
 import Models.Ingredients
+import Models.IngrRecette
 import Schemas.Ingredients
 from Functions import *
 
@@ -33,8 +34,8 @@ def create_ingredient(db: Session, ingr: Schemas.Ingredients.IngrCreate, foyer: 
     db.refresh(db_ingr)
     return db_ingr
 
-def update_ingr(db: Session, ingr: Schemas.Ingredients.IngrCreate, foyer: int):
-    db_ingr = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.name == ingr.name, Models.Ingredients.Ingr.foyer == foyer).first()
+def update_ingr(db: Session, ingr: Schemas.Ingredients.IngrUpdate):
+    db_ingr = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.id == ingr.id).first()
     
     if not db_ingr:
         return None  # ou tu peux lever une exception HTTPException(status_code=404)
@@ -43,15 +44,20 @@ def update_ingr(db: Session, ingr: Schemas.Ingredients.IngrCreate, foyer: int):
     db_ingr.mesure = ingr.mesure
     db_ingr.description = ingr.description
     db_ingr.image = ingr.image
-    db_ingr.foyer = foyer  # utile si le foyer peut changer
 
     db.commit()
     db.refresh(db_ingr)
     return db_ingr
 
 
-def delete_ingredient(db: Session, ingr: Schemas.Ingredients.IngrCreate, foyer: int):
-    ingr = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.name == ingr.name, Models.Ingredients.Ingr.foyer == foyer).first()
+def delete_ingredient(db: Session, ingr: Schemas.Ingredients.IngrDelete):
+    ingrRecette = db.query(Models.IngrRecette.IngrRecette).filter(Models.IngrRecette.IngrRecette.ref_ingr == ingr.id).all()
+    if ingrRecette:
+        for i in ingrRecette:
+            db.delete(i)
+        db.commit()
+
+    ingr = db.query(Models.Ingredients.Ingr).filter(Models.Ingredients.Ingr.id == ingr.id).first()
     if ingr:
         db.delete(ingr)
         db.commit()

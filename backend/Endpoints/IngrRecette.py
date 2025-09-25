@@ -20,3 +20,7 @@ def all(app, get_db):
     @app.get("/ingredients_recette/{recette}", response_model=list[Schemas.IngrRecette.IngrRecetteDetail], tags=["Ingrédient de recette"])
     def get_ingredients_from_recette(recette: int, db: Session = Depends(get_db)):
         return Crud.IngrRecette.get_from_recette(db, recette)
+
+    @app.get("/ingredients_recette_count/{ingr_id}", response_model=int, tags=["Ingrédient de recette"])
+    def get_ingredient_count_recette_route(ingr_id: str, db: Session = Depends(get_db)):
+        return Crud.IngrRecette.get_ingredient_count_recette(db, ingr_id)

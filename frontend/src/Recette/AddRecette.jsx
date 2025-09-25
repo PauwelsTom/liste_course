@@ -34,15 +34,22 @@ export class AddRecette extends Component {
             description: document.getElementById("RecetteDescription").value
         }
         const rec = new RecetteClass(data);
-
-        if (this.props.recette != null) {
+        if (rec.name === "") {
+            alert("Veuillez entrer un nom à votre recette");
+            document.getElementById("RecetteName").focus();
+            return;
+        }
+        if (this.props.recette.id != null) {
             rec.id = this.props.recette.id;
             await this.req.update_recette(rec);
         } else {
-            await this.req.add_recette(rec);
+            const res = await this.req.create_recette(rec, this.props.foyer);
+            console.log(res);
+            rec.id = res.id;
         }
 
-        await this.add_all_new_ingr();
+        console.log(rec);
+        await this.add_all_new_ingr(rec.id);
         await this.update_all_ingredients();
 
         this.props.exit(); 
@@ -50,10 +57,11 @@ export class AddRecette extends Component {
         return;
     }
 
-    add_all_new_ingr = async () => {
+    add_all_new_ingr = async (recette_id) => {
         for (let index = 0; index < this.state.added.length; index++) {
             const ingr = this.state.added[index];
-            await this.req.create_ingr_recette_by_name(this.props.recette.id, ingr.name, ingr.quantite)
+            if (ingr.name === "") { continue; }
+            await this.req.create_ingr_recette(recette_id, ingr);
         }
     }
 
@@ -73,6 +81,7 @@ export class AddRecette extends Component {
     modify_ingr = (index, name=null, quantite=null) => {
         if (name!=null) {
             this.state.added[index].name = name;
+            this.state.added[index].id = parseInt(name);
         }
         if (quantite != null) {
             this.state.added[index].quantite = quantite
@@ -85,10 +94,15 @@ export class AddRecette extends Component {
         this.setState({added: this.state.added});
     }
 
+    exit = () => {
+        this.setState({ingredients: [], added: []});
+        this.props.exit();
+    }
+
     async componentDidUpdate() {
         if (this.visible !== this.props.visible) {
             this.visible = this.props.visible;
-            if (this.props.recette == null) { return; }
+            if (this.props.recette == null || this.props.recette.id == null) { return; }
             const ingrList = await this.req.get_ingr_recette(this.props.recette.id);
             this.setState({ingredients: json_to_ingrRecetteList(ingrList)});
         }
@@ -119,7 +133,10 @@ export class AddRecette extends Component {
                         this.state.ingredients.map((ingr, index) => {
                             return  <div className="IngredientListeElement" key={ingr.id}>
                                         <span className="IngrNameListe">{ingr.name}</span>
-                                        <input id={"inputQuantite" + ingr.name} type="number" defaultValue={ingr.quantite}/>
+                                        <div className="QuantiteIngredientListDiv">
+                                            <input className="IngrQuantiteListe" id={"inputQuantite" + ingr.name} type="number" defaultValue={ingr.quantite}/>
+                                            <span>{ingr.mesure}</span>
+                                        </div>
                                         <button className="BoutonSupprimer" onClick={() => {this.delete_ingr(ingr)}}>Supprimer</button>
                                     </div>
                         })
@@ -129,16 +146,16 @@ export class AddRecette extends Component {
                         
                         this.state.added.map((elt, index) => {
                             return (
-                                <div className="IngredientListeElement">
+                                <div className="IngredientListeElement" key={index}>
                                     <select className="IngredientSelect" value={this.state.added[index].name} onChange={(event) => {this.modify_ingr(index, event.target.value)}}>
-                                        <option key="0" value=""></option>
+                                        <option key="0" value={null}></option>
                                         {this.state.ingredientList && this.state.ingredientList.map((ingr) => (
                                             <option key={ingr.id} value={ingr.id}>
                                                 {ingr.name}
                                             </option>
                                         ))}
                                     </select>
-                                    <input type="number" value={this.state.added[index].quantite} onChange={(event) => {this.modify_ingr(index, null, event.target.value)}}/>
+                                    <input className="IngrQuantiteListe" type="number" value={this.state.added[index].quantite} onChange={(event) => {this.modify_ingr(index, null, event.target.value)}}/>
                                     <button className="BoutonSupprimer" onClick={() => this.suppr_added(index)}>Supprimer</button>
                                 </div>
                             )
@@ -148,7 +165,10 @@ export class AddRecette extends Component {
                     {/* Ajouter un select avec comme option les this.ingredient_list */}
                     <button className="BoutonAjouterIngredient" onClick={this.add_ingr}>Ajouter un ingrédient</button>
                 </div>
-                <button className="BoutonOkRecette" onClick={this.modify_recette}>Valider</button>
+                <div className="LigneBoutons">
+                    <button className="BoutonOkRecette" onClick={this.exit}>Retour</button>
+                    <button className="BoutonOkRecette" onClick={this.modify_recette}>Valider</button>
+                </div>
             </div>
         );
     }

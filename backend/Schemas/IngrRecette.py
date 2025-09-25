@@ -19,6 +19,7 @@ class IngrRecetteDetail(BaseModel):
     id: int
     name: str
     quantite: int
+    mesure: str
 
     class Config:
         from_attributes = True

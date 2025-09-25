@@ -66,7 +66,8 @@
 button{
     padding: 1vh;
     
-    border: 1px solid lightgray;
+    background-color: var(--bouton-background);
+    border: 1px solid var(--bouton-border);
     border-radius: 5vh;
 
     font-size: 1.5vh;
@@ -77,6 +78,6 @@ button{
 button:hover {
     cursor: pointer;
 
-    background-color: lightgray;
-    border: 1px solid gray;
+    background-color: var(--bouton-background-hover);
+    border: 1px solid var(--bouton-border-hover);
 }

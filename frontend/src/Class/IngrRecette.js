@@ -5,6 +5,7 @@ export class IngrRecetteClass {
         this.id = rec.id
         this.name = rec.name
         this.quantite = rec.quantite
+        this.mesure = rec.mesure == null? "-": rec.mesure;
     }
 
     to_json = () => {

@@ -1,8 +1,13 @@
 :root {
     --couleur-menu-princpal: #669bbc;
-    --bouton-retour: black;
-    --background-color: #ffffff;
-    --header-bar: #cccccc;
+    --bouton-retour: white;
+    --background-color: white;
+    --header-bar: #669bbc;
+
+    --bouton-background: #dddddd;
+    --bouton-border: #cccccc;
+    --bouton-background-hover: #cccccc;
+    --bouton-border-hover: #bbbbbb;
 
     --foyer: white;
     --foyer-hover: #eeeeee;

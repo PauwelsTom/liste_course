@@ -2,6 +2,7 @@ import "./Foyer.css"
 import { Component } from "react";
 import { FoyerForm } from "./FoyerForm";
 import { FoyerClass } from "../Class/Foyer";
+import { RequeteClass } from "../Class/Requete";
 
 // foyer, select, selected, get_foyer
 export class Foyer extends Component {
@@ -11,6 +12,7 @@ export class Foyer extends Component {
             params: false,
             foyer: props.foyer
         }
+        this.req = new RequeteClass();
         this.add = this.state.foyer.name === "add";
     }
 
@@ -32,47 +34,17 @@ export class Foyer extends Component {
         });
     }
 
-    modifier = (name, description) => {
+    modifier = async (name, description) => {
         const foyer = this.build_foyer_class(name, description);
         this.setState({foyer: foyer, params: false});
-        
-        fetch("http://127.0.0.1:8000/foyer/", {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(foyer.to_json())
-        })
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Problème lors de la connexion à l'API");
-
-                return response.json();
-            })
-            .catch(e => alert("Erreur lors de la requête:" + e))
-            .finally(() => {
-                this.props.get_foyer();
-            })
+        await this.req.update_foyer(foyer);
+        console.log("On passe ici")
+        this.props.get_foyer();
     }
 
-    supprimer = () => {
-        fetch("http://127.0.0.1:8000/foyer/", {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({id: this.state.foyer.id})
-        })
-            .then(response => {
-                if (!response.ok)
-                    throw new Error("Problème lors de la connexion à l'API");
-
-                return response.json();
-            })
-            .catch(e => alert("Erreur lors de la requête:" + e))
-            .finally(() => {
-                this.props.get_foyer();
-            })
+    supprimer = async () => {
+        await this.req.delete_foyer(this.state.foyer);
+        this.props.get_foyer();
     }
 
     render() {

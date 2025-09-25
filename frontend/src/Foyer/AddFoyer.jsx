@@ -23,12 +23,8 @@ export class AddFoyer extends Component {
         this.setState({unrolled: !this.state.unrolled});
     }
 
-    add_foyer = () => {
-        const name = document.getElementById("foyerNameInput").value;
-        const description = document.getElementById("foyerDescriptionInput").value;
+    add_foyer = (name, description) => {
         this.props.add(name, description)
-        document.getElementById("foyerNameInput").value = "";
-        document.getElementById("foyerDescriptionInput").value = "";
         this.changeMode();
     }
 
@@ -41,7 +37,7 @@ export class AddFoyer extends Component {
                     <button onClick={this.changeMode}>Ajouter</button>
                 </div>
 
-                <FoyerForm visible={this.state.unrolled} add={this.props.add}
+                <FoyerForm visible={this.state.unrolled} add={this.add_foyer}
                     changeMode={this.changeMode}/>
             </div>
         );

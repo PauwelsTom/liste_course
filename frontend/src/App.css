@@ -23,10 +23,10 @@
 
 .HeaderBar {
   background-color: var(--header-bar);
+  color: var(--bouton-retour);
+  padding-top: 5vh;
   height: 10vh;
   width: 100vw;
-
-  margin-top: 5vh;
 
   display: flex;
   justify-content: center;
@@ -34,4 +34,17 @@
 
   font-size: 5vh;
   font-weight: 800;
+}
+
+/* Masquer les flèches sur Chrome, Safari, Edge */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Masquer les flèches sur Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

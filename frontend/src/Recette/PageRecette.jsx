@@ -21,8 +21,8 @@ export class PageRecette extends Component {
             addMode: !this.state.addMode,
             recette: rec
         })
-        const name = (rec == null? "": rec.name);
-        const descr = (rec == null? "": rec.description);
+        const name = (rec == null || rec.name == null? "": rec.name);
+        const descr = (rec == null || rec.description == null? "": rec.description);
 
         document.getElementById("RecetteName").value = name;
         document.getElementById("RecetteDescription").value = descr;

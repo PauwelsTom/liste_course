@@ -2,6 +2,7 @@ export class IngredientClass {
     constructor(ingr) {
         this.attribute_list_form = ["name", "type", "mesure", "description", "image"];
         
+        this.id = ingr.id;
         this.name = ingr.name;
         this.type = ingr.type;
         this.mesure = ingr.mesure;

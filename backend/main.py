@@ -17,7 +17,7 @@ app = FastAPI(title="Shopping List API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # ton front React
+    allow_origins=["*"],  # ton front React
     allow_credentials=True,
     allow_methods=["*"],  # autorise toutes les méthodes HTTP
     allow_headers=["*"],  # autorise tous les headers
