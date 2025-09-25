@@ -38,6 +38,18 @@ def update_liste(db: Session, liste: Schemas.MaListe.ListeUpdate):
     db.refresh(db_recette)
     return db_recette
 
+def check_liste(db: Session, liste_id: int, liste: Schemas.MaListe.ListeCheck):
+    db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.id == liste_id).first()
+
+    if not db_recette:
+        return None
+    
+    db_recette.check = liste.check
+
+    db.commit()
+    db.refresh(db_recette)
+    return db_recette
+
 def delete_liste(db: Session, liste: Schemas.MaListe.ListeDelete):
     delete_all_ingr_recette(db=db, recette=liste.id)
     db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.id == liste.id).first()

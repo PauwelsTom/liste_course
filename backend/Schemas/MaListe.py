@@ -15,9 +15,7 @@ class ListeDelete(BaseModel):
     id: int
 
 class ListeCheck(BaseModel):
-    id: int
     check: bool
-    foyer: int
 
 class Liste(ListeBase):
     id: int

@@ -12,6 +12,10 @@ def all(app, get_db):
     @app.put("/ma_liste/", response_model=Schemas.MaListe.Liste, tags=["Ma Liste"])
     def update_liste_route(liste: Schemas.MaListe.ListeUpdate, db: Session = Depends(get_db)):
         return Crud.MaListe.update_liste(db=db, liste=liste)
+    
+    @app.put("/ma_liste/check/{liste_id}", response_model=Schemas.MaListe.Liste, tags=["Ma Liste"])
+    def update_liste_route(liste_id: int, liste: Schemas.MaListe.ListeCheck, db: Session = Depends(get_db)):
+        return Crud.MaListe.check_liste(db=db, liste_id=liste_id, liste=liste)
 
     @app.post("/ma_liste/{foyer}", response_model=Schemas.MaListe.Liste, tags=["Ma Liste"])
     def create_liste_route(foyer: int, liste: Schemas.MaListe.ListeCreate, db: Session = Depends(get_db)):
