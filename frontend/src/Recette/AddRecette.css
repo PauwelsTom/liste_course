@@ -15,7 +15,7 @@
 
 .IngredientsRecetteDiv {
     width: 100vw;
-    height: 60vh;
+    height: 50vh;
     
     display: flex;
     flex-direction: column;
@@ -106,4 +106,17 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+}
+
+.BoutonSupprimerRecette {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-top: 1vh;
+
+    padding: 1.5vh;
+    
+    font-size: 3vh;
+
+    background-color: red;
+
 }

@@ -34,7 +34,10 @@ export class RequeteClass {
                 description: ingr.description,
                 image: ingr.image
             })
-        });
+        })
+        const json = await res.json();
+        this.create_item_ma_liste(foyer, json.id, false, debug);
+
         return res;
     }
 
@@ -68,6 +71,7 @@ export class RequeteClass {
                 id: ingr.id
             })
         });
+        this.ma_liste_delete_foy_item(ingr.foyer, ingr.id, false, debug);
         return res;
     }
 
@@ -144,8 +148,11 @@ export class RequeteClass {
                 name: rec.name,
                 description: rec.description
             })
-        });
-        return res.json();
+        })
+
+        const json = await res.json();
+        this.create_item_ma_liste(foyer, json.id, true, debug);
+        return json;
     }
 
     update_recette = async (rec, debug=false) => {
@@ -175,6 +182,7 @@ export class RequeteClass {
                 id: rec.id
             })
         });
+        await this.ma_liste_delete_foy_item(rec.foyer, rec.id, true, debug);
         return res;
     }
 
@@ -259,10 +267,97 @@ export class RequeteClass {
         if (debug) { console.log("MA LISTE GET ITEMS\n\nRecette: ", recette, "\n\nFoyer: ", foyer); }
         
         if (recette) {
-            const res = await fetch(this.url + "/recette/" + foyer.toString());
-            return res.json()
+            const res = await fetch(this.url + "/ma_liste/recette/" + foyer.toString());
+            return res.json();
+        } else {
+            const res = await fetch(this.url + "/ma_liste/ingredient/" + foyer.toString());
+            return res.json();
         }
-
     }
 
+    create_item_ma_liste = async (foyer_id, item_id, recette, debug=false) => {
+        if (debug) { console.log("MA LISTE CREATE ITEMS\n\nFoyer: ", foyer_id, "\n\nItem: ", item_id, "\n\nRecette: ", recette); }
+        const res = await fetch(this.url + "/ma_liste/" + foyer_id.toString(), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                ref: item_id,
+                recette: recette
+            })
+        });
+        return res;
+    }
+
+    ma_liste_check = async (liste_id, check, debug=false) => {
+        if (debug) { console.log("MA LISTE CHECK\n\nListe ID: ", liste_id, "\n\nCheck: ", check); }
+        const res = await fetch(this.url + "/ma_liste/check/" + liste_id.toString(), {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                check: check
+            })
+        });
+        return res
+    }
+
+    ma_liste_add = async (liste_id, quantite, debug=false) => {
+        if (debug) { console.log("MA LISTE ADD\n\nListe ID: ", liste_id, "\n\nQuantite: ", quantite); }
+        const res = await fetch(this.url + "/ma_liste/add/", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: liste_id,
+                quantite: quantite
+            })
+        });
+        return res;
+    }
+
+    ma_liste_set = async (liste_id, quantite, debug=false) => {
+        if (debug) { console.log("MA LISTE SET\n\nListe ID: ", liste_id, "\n\nQuantite: ", quantite); }
+        const res = await fetch(this.url + "/ma_liste/set/", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: liste_id,
+                quantite: quantite
+            })
+        });
+        return res;
+    }
+
+    ma_liste_delete = async (liste_id, debug=false) => {
+        if (debug) { console.log("MA LISTE DELETE\n\nListe ID: ", liste_id); }
+        const res = await fetch(this.url + "/ma_liste/", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: liste_id
+            })
+        });
+        return res;
+    }
+
+    ma_liste_delete_foy_item = async (foyer_id, item, recette, debug=false) => {
+        if (debug) { console.log("MA LISTE DELETE FOY ITEM\n\nFoyer: ", foyer_id, "\n\ningr_id: ", item, "\n\nRecette: ", recette); }
+        const ma_liste = await this.get_items_ma_liste(recette, foyer_id, debug);
+        console.log(ma_liste)
+
+        for (let i = 0; i < ma_liste.length; i++) {
+            if (ma_liste[i].ref === item && ma_liste[i].foyer === foyer_id) {
+                this.ma_liste_delete(ma_liste[i].id, debug);
+                return;
+            }
+        }
+    }
 }

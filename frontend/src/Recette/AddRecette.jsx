@@ -99,6 +99,11 @@ export class AddRecette extends Component {
         this.props.exit();
     }
 
+    suppr_recette = async () => {
+        await this.req.delete_recette(this.props.recette, true);
+        this.props.exit();
+    }
+
     async componentDidUpdate() {
         if (this.visible !== this.props.visible) {
             this.visible = this.props.visible;
@@ -169,6 +174,7 @@ export class AddRecette extends Component {
                     <button className="BoutonOkRecette" onClick={this.exit}>Retour</button>
                     <button className="BoutonOkRecette" onClick={this.modify_recette}>Valider</button>
                 </div>
+                <button className="BoutonSupprimerRecette" onClick={this.suppr_recette}>Supprimer</button>
             </div>
         );
     }

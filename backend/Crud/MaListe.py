@@ -7,6 +7,12 @@ from Crud.IngrRecette import delete_all_ingr_recette
 def get_all_liste(db: Session, foyer: int):
     return db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.foyer == foyer).all()
 
+def get_all_liste_ingredient(db: Session, foyer: int):
+    return db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.foyer == foyer and Models.MaListe.MaListe.recette == False).all()
+
+def get_all_liste_recette(db: Session, foyer: int):
+    return db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.foyer == foyer and Models.MaListe.MaListe.recette == True).all()
+
 def liste_set_quantite(db: Session, liste: Schemas.MaListe.ListeUpdate):
     db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.id == liste.id).first()
  

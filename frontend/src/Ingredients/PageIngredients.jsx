@@ -33,7 +33,7 @@ export class PageIngredients extends Component {
         if (save) {
             let typeRequete = "";
             if (newIngr) {
-                const res = await this.req.create_ingredient(ingr, this.foyer.toString())
+                const res = await this.req.create_ingredient(ingr, this.foyer.toString(), true)
                 this.setState({ingrList: json_to_ingrList(res)});
             } else {
                 const res = await this.req.update_ingredient(ingr, this.foyer.toString())
@@ -55,7 +55,8 @@ export class PageIngredients extends Component {
             return;
         }
 
-        const res = await this.req.delete_ingredient(ingr);
+        ingr.foyer = this.foyer;
+        const res = await this.req.delete_ingredient(ingr, true);
 
         this.setState({ingrSelected: null});
         this.get_all_ingr();
