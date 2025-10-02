@@ -43,6 +43,16 @@ export class Foyer extends Component {
     }
 
     supprimer = async () => {
+        while (true) {
+            const res = window.prompt("Voulez vous supprimer le foyer " + this.state.foyer.name + "?\nTapez 'CONFIRMER' pour confirmer");
+            if (res === null) {
+                return;
+            }
+            if (res === "CONFIRMER") {
+                break;
+            }
+
+        }
         await this.req.delete_foyer(this.state.foyer);
         this.props.get_foyer();
     }

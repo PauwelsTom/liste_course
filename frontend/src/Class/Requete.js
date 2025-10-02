@@ -1,6 +1,6 @@
 export class RequeteClass {
     constructor() {
-        this.host = "localhost";
+        this.host = "127.0.0.1";
         this.port = "8000";
         this.url = "http://" + this.host + ":" + this.port;
     }

@@ -31,7 +31,6 @@ export class PageIngredients extends Component {
 
     saveChange = async (save, newIngr=true, ingr=null) => {
         if (save) {
-            let typeRequete = "";
             if (newIngr) {
                 const res = await this.req.create_ingredient(ingr, this.foyer.toString(), true)
                 this.setState({ingrList: json_to_ingrList(res)});
@@ -56,10 +55,10 @@ export class PageIngredients extends Component {
         }
 
         ingr.foyer = this.foyer;
-        const res = await this.req.delete_ingredient(ingr, true);
+        await this.req.delete_ingredient(ingr, true);
 
+        await this.get_all_ingr();
         this.setState({ingrSelected: null});
-        this.get_all_ingr();
     }
 
     componentDidMount() {
