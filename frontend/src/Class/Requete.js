@@ -360,4 +360,13 @@ export class RequeteClass {
             }
         }
     }
+
+
+    // ! MAGASIN
+
+    get_magasin_ingr = async (foyer, debug=false) => {
+        if (debug) { console.log("GET MAGASIN INGR\n\nFoyer: ", foyer); }
+        const res = await fetch(this.url + "/magasin/" + foyer.toString());
+        return res.json();
+    }
 }

@@ -29,10 +29,10 @@ def all(app, get_db):
     def get_liste_route(foyer: int, db: Session = Depends(get_db)):
         return Crud.MaListe.get_all_liste(db, foyer)
 
-    @app.get("/ma_liste/recette/{foyer}", response_model=list[Schemas.MaListe.Liste], tags=["Ma Liste"])
+    @app.get("/ma_liste/recette/{foyer}", response_model=list[Schemas.MaListe.ListeName], tags=["Ma Liste"])
     def get_liste_route(foyer: int, db: Session = Depends(get_db)):
         return Crud.MaListe.get_all_liste_recette(db, foyer)
 
-    @app.get("/ma_liste/ingredient/{foyer}", response_model=list[Schemas.MaListe.Liste], tags=["Ma Liste"])
+    @app.get("/ma_liste/ingredient/{foyer}", response_model=list[Schemas.MaListe.ListeName], tags=["Ma Liste"])
     def get_liste_route(foyer: int, db: Session = Depends(get_db)):
         return Crud.MaListe.get_all_liste_ingredient(db, foyer)

@@ -8,10 +8,48 @@ def get_all_liste(db: Session, foyer: int):
     return db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.foyer == foyer).all()
 
 def get_all_liste_ingredient(db: Session, foyer: int):
-    return db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.foyer == foyer and Models.MaListe.MaListe.recette == False).all()
+    rows = (
+        db.query(Models.MaListe.MaListe, Models.Ingredients.Ingr.name.label("name"))
+        .join(Models.Ingredients.Ingr, Models.MaListe.MaListe.ref == Models.Ingredients.Ingr.id)
+        .filter(Models.MaListe.MaListe.foyer == foyer, Models.MaListe.MaListe.recette == False)
+        .order_by(Models.Ingredients.Ingr.type.asc(), Models.Ingredients.Ingr.name.asc())   # tri ascendant sur name
+        .all()
+    )
+
+    return [
+        {
+            "id": maliste.id,
+            "quantite": maliste.quantite,
+            "check": maliste.check,
+            "ref": maliste.ref,
+            "foyer": maliste.foyer,
+            "recette": maliste.recette,
+            "name": name,
+        }
+        for maliste, name in rows
+    ]
 
 def get_all_liste_recette(db: Session, foyer: int):
-    return db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.foyer == foyer and Models.MaListe.MaListe.recette == True).all()
+    rows = (
+        db.query(Models.MaListe.MaListe, Models.Recette.Recette.name.label("name"))
+        .join(Models.Recette.Recette, Models.MaListe.MaListe.ref == Models.Recette.Recette.id)
+        .filter(Models.MaListe.MaListe.foyer == foyer, Models.MaListe.MaListe.recette == True)
+        .order_by(Models.Recette.Recette.name.asc())   # tri ascendant sur namec
+        .all()
+    )
+
+    return [
+        {
+            "id": maliste.id,
+            "quantite": maliste.quantite,
+            "check": maliste.check,
+            "ref": maliste.ref,
+            "foyer": maliste.foyer,
+            "recette": maliste.recette,
+            "name": name,
+        }
+        for maliste, name in rows
+    ]
 
 def liste_set_quantite(db: Session, liste: Schemas.MaListe.ListeUpdate):
     db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.id == liste.id).first()

@@ -8,6 +8,7 @@ import Endpoints.Foyer
 import Endpoints.IngrRecette
 import Endpoints.Recette
 import Endpoints.MaListe
+import Endpoints.Magasin
 
 
 
@@ -42,3 +43,4 @@ Endpoints.Foyer.all(app, get_db)
 Endpoints.IngrRecette.all(app, get_db)
 Endpoints.Recette.all(app, get_db)
 Endpoints.MaListe.all(app, get_db)
+Endpoints.Magasin.all(app, get_db)

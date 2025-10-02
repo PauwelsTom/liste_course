@@ -26,3 +26,9 @@ class Liste(ListeBase):
 
     class Config:
         from_attributes = True
+
+class ListeName(Liste):
+    name: str
+
+    class Config:
+        from_attributes = True

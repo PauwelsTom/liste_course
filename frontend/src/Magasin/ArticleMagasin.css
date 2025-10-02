@@ -1,0 +1,26 @@
+.ArticleMagasinDiv {
+    height: 10vh;
+    width: 100vw;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    border-bottom: 1px solid lightgray;
+    background-color: var(--background-color);
+}
+
+.NomArticleMagasin {
+    width: 40vw;
+    font-size: 2.5vh;
+    font-weight: 600;
+}
+
+.QuantiteArticleMagasin {
+    width: 20vw;
+}
+
+.CheckArticleMagasin {
+    height: 8vh;
+}
