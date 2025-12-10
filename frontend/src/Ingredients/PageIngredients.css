@@ -7,5 +7,6 @@
 }
 
 .IngredientListDiv {
-
+    height: 85vh;
+    overflow: scroll;
 }

@@ -5,13 +5,24 @@ from dotenv import load_dotenv
 
 load_dotenv()  # charge le .env
 
+# DB_USER = os.getenv("POSTGRES_USER", "Toum")
+# DB_PASSWORD = os.getenv("POSTGRES_PASSWORD", "PatateSecrete")
+# DB_NAME = os.getenv("POSTGRES_HOST", "ListeCoursesDB")
+# DB_HOST = os.getenv("POSTGRES_HOST", "host.docker.internal")
+# # DB_PORT = os.getenv("POSTGRES_PORT", 5432)
+# DB_PORT = "5432"
+
+# DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+# # DATABASE_URL = os.getenv("DATABASE_URL")
+
 DB_USER = os.getenv("POSTGRES_USER", "Toum")
 DB_PASSWORD = os.getenv("POSTGRES_PASSWORD", "PatateSecrete")
-DB_NAME = os.getenv("POSTGRES_HOST", "ListeCoursesDB")
-DB_HOST = os.getenv("POSTGRES_HOST", "localhost")
-DB_PORT = os.getenv("POSTGRES_PORT", "5432")
+DB_NAME = os.getenv("POSTGRES_DB", "ListeCoursesDB")
+DB_HOST = os.getenv("POSTGRES_HOST", "ListeCourses_postgres")
+DB_PORT = os.getenv("POSTGRES_PORT", 5432)
 
 DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+
 
 engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

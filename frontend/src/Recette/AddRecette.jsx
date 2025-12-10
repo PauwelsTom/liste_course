@@ -39,6 +39,7 @@ export class AddRecette extends Component {
             document.getElementById("RecetteName").focus();
             return;
         }
+        rec.foyer = this.props.foyer;
         if (this.props.recette.id != null) {
             rec.id = this.props.recette.id;
             await this.req.update_recette(rec);
@@ -47,7 +48,6 @@ export class AddRecette extends Component {
             console.log(res);
             rec.id = res.id;
         }
-
         console.log(rec);
         await this.add_all_new_ingr(rec.id);
         await this.update_all_ingredients();

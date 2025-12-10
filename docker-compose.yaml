@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: ListeCourses_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: Toum
+      POSTGRES_PASSWORD: PatateSecrete
+      POSTGRES_DB: ListeCoursesDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: ListeCourses_backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://Toum:PatateSecrete@db:5432/ListeCoursesDB
+
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    container_name: ListeCourses_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  db_data:

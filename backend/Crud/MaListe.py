@@ -64,7 +64,7 @@ def liste_set_quantite(db: Session, liste: Schemas.MaListe.ListeUpdate):
     return db_recette
 
 def create_liste(db: Session, liste: Schemas.MaListe.ListeCreate, foyer: int):
-    db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.ref == liste.ref and Models.MaListe.MaListe.recette == liste.recette).first()
+    db_recette = db.query(Models.MaListe.MaListe).filter(Models.MaListe.MaListe.ref == liste.ref, Models.MaListe.MaListe.recette == liste.recette).first()
     if db_recette:
         return None
     
