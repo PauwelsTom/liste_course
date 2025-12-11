@@ -29,6 +29,9 @@ class Liste(ListeBase):
 
 class ListeName(Liste):
     name: str
+    type: str
+    image: str
+    mesure: str
 
     class Config:
         from_attributes = True

@@ -3,6 +3,7 @@ import { Component } from "react";
 import { BoutonRetour } from "../Menu_principal/BoutonRetour";
 import { RequeteClass } from "../Class/Requete";
 import { ArticleMagasin } from "./ArticleMagasin";
+import { Categorie } from "../Liste/Categorie";
 
 export class PageMagasin extends Component {
     constructor(props) {
@@ -45,9 +46,18 @@ export class PageMagasin extends Component {
                 </header>
                 <div className="PageMagasinDiv">
                     {this.state.ingrList.map((ingr, index) => {
-                        return (
-                            <ArticleMagasin ingr={ingr} key={index} check_ingr={this.check_ingr}/>
-                        )
+                        if ((index == 0 || ingr.type != this.state.ingrList[index - 1].type)) {
+                            return (
+                                <div>
+                                    <Categorie categorie={ingr.type}/>
+                                    <ArticleMagasin ingr={ingr} key={index} check_ingr={this.check_ingr}/>
+                                </div>
+                            )
+                        } else {
+                            return (
+                                <ArticleMagasin ingr={ingr} key={index} check_ingr={this.check_ingr}/>
+                            )
+                        }
                     })}
                 </div>
             </div>

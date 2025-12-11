@@ -18,6 +18,7 @@ export class RequeteClass {
     get_ingredient_by_name = async (ingr_name, debug=false) => {
         if (debug) { console.log("GET INGREDIENT BY NAME\n\nIngrédient: ",ingr_name); }
         const res = await fetch(this.url + "/ingredient/" + ingr_name);
+        // console.log(await res.json());
         return res.json();
     }
 

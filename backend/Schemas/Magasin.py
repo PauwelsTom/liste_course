@@ -8,6 +8,8 @@ class Liste(BaseModel):
     name: str
     quantite: int
     mesure: str
+    image: str
+    type: str
     
     class Config:
         from_attributes = True

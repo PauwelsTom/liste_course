@@ -1,0 +1,9 @@
+.CategorieDiv {
+    width: 100vw;
+    height: 3vh;
+    font-size: 2vh;
+    background-color: green;
+    color: white;
+    text-align: center;
+    border-radius: 0.5vh;
+}

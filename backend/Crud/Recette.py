@@ -5,7 +5,13 @@ from Crud.IngrRecette import delete_all_ingr_recette
 
 
 def get_all_recette(db: Session, foyer: int):
-    return db.query(Models.Recette.Recette).filter(Models.Recette.Recette.foyer == foyer).all()
+    return (
+        db.query(Models.Recette.Recette)
+        .filter(Models.Recette.Recette.foyer == foyer)
+        .order_by(Models.Recette.Recette.name.asc())
+        .all()
+    )
+
 
 def create_recette(db: Session, recette: Schemas.Recette.RecetteCreate, foyer: int):
     db_recette = Models.Recette.Recette(

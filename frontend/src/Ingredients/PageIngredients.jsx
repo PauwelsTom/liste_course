@@ -68,10 +68,10 @@ export class PageIngredients extends Component {
     render() {
         const body = (this.state.ingrSelected === null?
             <div className="IngredientListDiv">
+                <Ingredient ingr={new IngredientClass({name: "add"})} select={this.selectIngr}/>
                 {this.state.ingrList.map((ingr, key) => {
                     return <Ingredient key={key} ingr={ingr} select={this.selectIngr}/>
                 })}
-                <Ingredient ingr={new IngredientClass({name: "add"})} select={this.selectIngr}/>
             </div>
             :<IngredientModif ingr={this.state.ingrSelected} saveChange={this.saveChange}
                     suppr={this.supprIngr}/>

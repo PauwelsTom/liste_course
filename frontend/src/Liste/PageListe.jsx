@@ -3,13 +3,15 @@ import { Component } from "react";
 import { BoutonRetour } from "../Menu_principal/BoutonRetour";
 import { RequeteClass } from "../Class/Requete";
 import { ListeItem } from "./ListeItem";
+import { Categorie } from "./Categorie";
 
 export class PageListe extends Component {
     constructor(props) {
         super();
         this.state = {
             items: [],
-            modeRecette: true
+            modeRecette: true,
+            display_list: ""
         }
         this.req = new RequeteClass();
 
@@ -47,9 +49,18 @@ export class PageListe extends Component {
                 </header>
                 <div className="MaListeBody">
                     {this.state.items.map((item, index) => {
-                        return (
-                            <ListeItem item={item} get_items={this.get_items} key={index}/>
-                        )
+                        if (!this.state.modeRecette && (index == 0 || item.type != this.state.items[index - 1].type)) {
+                            return (
+                                <div>
+                                    <Categorie categorie={item.type}/>
+                                    <ListeItem item={item} get_items={this.get_items} key={index}/>
+                                </div>
+                            ) 
+                        } else {
+                            return (
+                                <ListeItem item={item} get_items={this.get_items} key={index}/>
+                            )
+                        }
                     })}
                 </div>
                 <div className="ModeListeAjoutDiv">

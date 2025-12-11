@@ -9,7 +9,7 @@ def get_all_liste(db: Session, foyer: int):
 
 def get_all_liste_ingredient(db: Session, foyer: int):
     rows = (
-        db.query(Models.MaListe.MaListe, Models.Ingredients.Ingr.name.label("name"))
+        db.query(Models.MaListe.MaListe, Models.Ingredients.Ingr)
         .join(Models.Ingredients.Ingr, Models.MaListe.MaListe.ref == Models.Ingredients.Ingr.id)
         .filter(Models.MaListe.MaListe.foyer == foyer, Models.MaListe.MaListe.recette == False)
         .order_by(Models.Ingredients.Ingr.type.asc(), Models.Ingredients.Ingr.name.asc())   # tri ascendant sur name
@@ -24,9 +24,12 @@ def get_all_liste_ingredient(db: Session, foyer: int):
             "ref": maliste.ref,
             "foyer": maliste.foyer,
             "recette": maliste.recette,
-            "name": name,
+            "name": ingr.name,
+            "type": ingr.type,
+            "mesure": ingr.mesure,
+            "image": ingr.image,
         }
-        for maliste, name in rows
+        for maliste, ingr in rows
     ]
 
 def get_all_liste_recette(db: Session, foyer: int):
@@ -47,6 +50,9 @@ def get_all_liste_recette(db: Session, foyer: int):
             "foyer": maliste.foyer,
             "recette": maliste.recette,
             "name": name,
+            "type": "Recette",
+            "mesure": "",
+            "image": "",
         }
         for maliste, name in rows
     ]

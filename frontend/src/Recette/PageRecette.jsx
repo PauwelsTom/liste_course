@@ -36,8 +36,8 @@ export class PageRecette extends Component {
                 <header className="HeaderBar">
                     <div onClick={this.debug}>Recettes</div>
                 </header>
-                <ListeRecettes visible={!this.state.addMode} foyer={this.state.foyer} select={this.modify_recette}/>
                 <AddRecette visible={this.state.addMode} recette={this.state.recette} exit={this.modify_recette} foyer={this.state.foyer}/>
+                <ListeRecettes visible={!this.state.addMode} foyer={this.state.foyer} select={this.modify_recette}/>
             </div>
         );
     }

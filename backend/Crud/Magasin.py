@@ -19,7 +19,9 @@ def get_magasin_ingredients(foyer: int, db: Session):
             ref_ingr=ingr["ref"],
             name=ingr["name"],
             quantite=ingr["quantite"],
-            mesure="."
+            mesure=ingr["mesure"],
+            image=ingr["image"],
+            type=ingr["type"]
         ))
 
     # 2. Recettes -> ingrédients
