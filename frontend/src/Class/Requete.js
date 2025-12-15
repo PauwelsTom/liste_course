@@ -363,6 +363,16 @@ export class RequeteClass {
         }
     }
 
+    ma_liste_reset = async (foyer_id, debug=false) => {
+        if (debug) { console.log("MA LISTE RESET\n\nFoyer: ", foyer_id); }
+        const res = await fetch(this.url + "/ma_liste/reset/" + foyer_id.toString(), {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return res;
+    }
 
     // ! MAGASIN
 

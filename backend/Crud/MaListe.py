@@ -126,3 +126,12 @@ def clear_liste(db: Session, foyer: int):
         db.commit()
         return True
     return False
+
+def reset_everything(db: Session, foyer: int):
+    # Met à jour toutes les lignes de ce foyer
+    db.query(Models.MaListe.MaListe).filter(
+        Models.MaListe.MaListe.foyer == foyer
+    ).update({Models.MaListe.MaListe.quantite: 0, Models.MaListe.MaListe.check: False}, synchronize_session=False)
+
+    db.commit()
+    return True

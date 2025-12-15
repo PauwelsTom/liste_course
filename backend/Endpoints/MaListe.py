@@ -36,3 +36,7 @@ def all(app, get_db):
     @app.get("/ma_liste/ingredient/{foyer}", response_model=list[Schemas.MaListe.ListeName], tags=["Ma Liste"])
     def get_liste_route(foyer: int, db: Session = Depends(get_db)):
         return Crud.MaListe.get_all_liste_ingredient(db, foyer)
+
+    @app.put("/ma_liste/reset/{foyer}", tags=["Ma Liste"])
+    def reset_quantite_foyer(foyer: int, db: Session = Depends(get_db)):
+        return Crud.MaListe.reset_everything(db, foyer)

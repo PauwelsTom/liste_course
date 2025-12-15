@@ -35,9 +35,11 @@ export class PageListe extends Component {
         this.setState({items: res});
     }
 
-    reset_liste = () => {
-        // Met tous les éléments (recettes et ingrédients) à 0
-        return
+    reset_liste = async () => {
+        if (!window.confirm("Voulez-vous remettre à 0 votre liste de course ?")) { return; }
+        
+        await this.req.ma_liste_reset(this.foyer)
+        this.get_items()
     }
 
     componentDidMount() {
@@ -51,7 +53,7 @@ export class PageListe extends Component {
                 <BoutonRetour visible={true}/>
                 <header className="HeaderBar">
                     <div onClick={this.debug}>Faire ma liste</div>
-                    <div className="ViderListe">X</div>
+                    <div className="ViderListe" onClick={this.reset_liste}>X</div>
                 </header>
                 <div className="MaListeBody">
                     {this.state.items.map((item, index) => {
