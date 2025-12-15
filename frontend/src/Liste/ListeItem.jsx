@@ -11,8 +11,8 @@ export class ListeItem extends Component {
 
     add_item = async () => {
         let quantite = 1;
-        while (!this.props.item.recette) {
-            quantite = window.prompt("En quelle quantité?")
+        while (!this.props.item.recette && this.props.item.mesure != "Piece") {
+            quantite = window.prompt("Combien de '" +  this.props.item.mesure + "' ?")
             if (quantite == null || quantite == "" || quantite == "0") {
                 return;
             }
@@ -31,8 +31,8 @@ export class ListeItem extends Component {
             return;
         }
         let quantite = 1;
-        while (!this.props.item.recette) {
-            quantite = window.prompt("En quelle quantité?")
+        while (!this.props.item.recette && this.props.item.mesure != "Piece") {
+            quantite = window.prompt("Combien de '" +  this.props.item.mesure + "' ?")
             if (quantite == null || quantite == "" || quantite == "0") {
                 return;
             }

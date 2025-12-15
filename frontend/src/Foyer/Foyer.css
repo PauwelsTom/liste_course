@@ -3,6 +3,7 @@
     border-bottom: 1px solid lightgray;
 
     transition: 0.5s ease;
+    width: 100vw;
 }
 
 .FoyerInfoDiv {

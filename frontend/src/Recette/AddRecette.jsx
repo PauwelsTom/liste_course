@@ -52,7 +52,7 @@ export class AddRecette extends Component {
         await this.add_all_new_ingr(rec.id);
         await this.update_all_ingredients();
 
-        this.props.exit(); 
+        this.exit(); 
         this.setState({added: []});
         return;
     }

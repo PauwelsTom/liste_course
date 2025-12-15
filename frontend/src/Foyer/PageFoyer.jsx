@@ -17,7 +17,24 @@ export class PageFoyer extends Component {
         this.req = new RequeteClass();
     }
 
+    mot_de_passe = (foyer) => {
+        const mdp = window.prompt("Entrez votre mot de passe")
+        const mdp_dict = {
+            1: "21042023", 
+            2: "Mathieu", 
+            3: "Emenxark", 
+            4: "Raakdal", 
+            5: "PauwelsSan", 
+            6: "Pompon", 
+            7: "Chouquette"
+        }
+        return mdp == mdp_dict[foyer]
+    }
+
     select_foyer = (foyer_id) => {
+        if (!this.mot_de_passe(foyer_id)) {
+            return;
+        }
         this.setState({selected: foyer_id});
         localStorage.setItem("foyer", foyer_id);
     }
@@ -66,7 +83,7 @@ export class PageFoyer extends Component {
                             );
                         })
                     }
-                    <AddFoyer add={this.create_foyer}/>
+                    {/* <AddFoyer add={this.create_foyer}/> */}
                     {/* <Foyer foyer={new FoyerClass({name: "add", description: "Cliquez ici pour ajouter votre foyer"})} select={this.create_foyer}/> */}
                 </div>
             </div>

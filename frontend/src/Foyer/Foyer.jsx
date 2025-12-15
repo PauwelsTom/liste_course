@@ -63,7 +63,7 @@ export class Foyer extends Component {
                 <div className="FoyerInfoDiv" onClick={() => this.props.select(this.state.foyer.id)}>
                     <span className="FoyerName">{this.state.foyer.name}</span>
                     <span className="FoyerDescription">{this.state.foyer.description}</span>
-                    <img className="FoyerImage" src="reglage.png" alt={this.state.foyer.name} onClick={this.toggleParams}/>
+                    {/* <img className="FoyerImage" src="reglage.png" alt={this.state.foyer.name} onClick={this.toggleParams}/> */}
                 </div>
                 <FoyerForm visible={this.state.params} add={this.modifier}
                 changeMode={this.supprimer} foyer={this.state.foyer}/>
