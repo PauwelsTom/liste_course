@@ -1,16 +1,23 @@
 .RecetteDiv {
-    width: 100vw;
-    height: 10vh;
-    min-height: 10vh;
-
+    background-color: var(--item-liste);
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-
-    border-bottom: 1px solid lightgray;
-
+    justify-content: space-between;
+    width: 90vw;
+    min-height: 9vh;
+    padding: min(2vh, 2vw);
+    border: 1px solid (--item-liste-border);
+    border-radius: min(2vh, 2vw);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     transition: 0.5s ease;
+}
+
+.RecetteDiv:hover {
+    background-color: var(--item-liste-hover);
+    border: 1px solid var(--item-liste-border-hover);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    width: 92vw;
+    margin-left: 0vw;
 }
 
 .RecetteDiv:hover {
@@ -18,12 +25,17 @@
 }
 
 .RecetteName {
-    width: 30vw;
+    width: 50vw;
+    font-size: 2.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
     text-align: center;
 }
 
 .RecetteDescription {
-    width: 60vw;
+    width: 20vw;
     color: gray;
     text-align: center;
 }
