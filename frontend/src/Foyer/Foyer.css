@@ -1,9 +1,15 @@
 .FoyerDiv {
-    background-color: var(--foyer);
-    border-bottom: 1px solid lightgray;
-
+    background-color: var(--item-liste);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90vw;
+    min-height: 9vh;
+    padding: min(2vh, 2vw);
+    border: 1px solid var(--item-liste-border);
+    border-radius: min(2vh, 2vw);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     transition: 0.5s ease;
-    width: 100vw;
 }
 
 .FoyerInfoDiv {
@@ -19,7 +25,11 @@
 }
 
 .FoyerDiv:hover {
-    background-color: var(--foyer-hover);
+    background-color: var(--item-liste-hover);
+    border: 1px solid var(--item-liste-border-hover);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    width: 92vw;
+    margin-left: 0vw;
 }
 
 .FoyerSelected:hover {

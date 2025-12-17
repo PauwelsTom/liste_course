@@ -9,6 +9,18 @@
     --bouton-background-hover: #cccccc;
     --bouton-border-hover: #bbbbbb;
 
+    --item-liste: #eeeeee;
+    --item-liste-hover: #dddddd;
+    --item-liste-border: #dddddd;
+    --item-liste-border-hover: #cccccc;
+    --item-liste-checked: #80feb7;
+    --item-liste-border-checked: #77e2a5;
+    --item-liste-checked-hover: #77e2a5;
+    --item-liste-border-checked-hover: #74c894;
+
+    --categorie-color: #4975a0;
+
+
     --foyer: white;
     --foyer-hover: #eeeeee;
     --foyer-selected: #80feb7;

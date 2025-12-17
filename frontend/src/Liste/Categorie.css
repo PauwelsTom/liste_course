@@ -1,9 +1,11 @@
 .CategorieDiv {
-    width: 100vw;
+    width: 80vw;
     height: 3vh;
-    font-size: 2vh;
-    background-color: green;
+    font-size: 3vh;
+    font-weight: 600;
+    background-color: var(--categorie-color);
     color: white;
     text-align: center;
-    border-radius: 0.5vh;
+    border-radius: 10vh;
+    padding: min(2vh, 2vw);
 }

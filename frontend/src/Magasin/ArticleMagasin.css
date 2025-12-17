@@ -1,14 +1,33 @@
 .ArticleMagasinDiv {
-    height: 10vh;
-    width: 100vw;
-    
+    background-color: var(--item-liste);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    width: 90vw;
+    min-height: 9vh;
+    padding: min(2vh, 2vw);
+    border: 1px solid var(--item-liste-border);
+    border-radius: min(2vh, 2vw);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: 0.5s ease;
+}
 
-    border-bottom: 1px solid lightgray;
-    background-color: var(--background-color);
+.ArticleMagasinDiv:hover {
+    background-color: var(--item-liste-hover);
+    border: 1px solid var(--item-liste-border-hover);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    width: 92vw;
+    margin-left: 0vw;
+}
+
+.ArticleMagasinChecked {
+    background-color: var(--item-liste-checked);
+    border: 1px solid var(--item-liste-border-checked);
+}
+
+.ArticleMagasinChecked:hover {
+    background-color: var(--item-liste-checked);
+    border: 1px solid var(--item-liste-border-checked);
 }
 
 .NomArticleMagasin {
@@ -27,5 +46,6 @@
 }
 
 .ImageArticleMagasin {
-    height: 100%;
+    height: 9vh;
+    border-radius: 1vh;
 }

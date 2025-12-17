@@ -59,7 +59,7 @@ export class PageListe extends Component {
                     {this.state.items.map((item, index) => {
                         if (!this.state.modeRecette && (index === 0 || item.type !== this.state.items[index - 1].type)) {
                             return (
-                                <div>
+                                <div className="FirstItem">
                                     <Categorie categorie={item.type}/>
                                     <ListeItem item={item} get_items={this.get_items} key={index}/>
                                 </div>

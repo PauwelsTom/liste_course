@@ -46,9 +46,9 @@ export class PageMagasin extends Component {
                 </header>
                 <div className="PageMagasinDiv">
                     {this.state.ingrList.map((ingr, index) => {
-                        if ((index == 0 || ingr.type != this.state.ingrList[index - 1].type)) {
+                        if ((index === 0 || ingr.type !== this.state.ingrList[index - 1].type)) {
                             return (
-                                <div>
+                                <div className="FirstItem">
                                     <Categorie categorie={ingr.type}/>
                                     <ArticleMagasin ingr={ingr} key={index} check_ingr={this.check_ingr}/>
                                 </div>

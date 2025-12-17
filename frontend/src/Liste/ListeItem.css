@@ -1,12 +1,23 @@
 .ListeItem {
-    background-color: var(--background-color);
-    height: 10vh;
-    width: 100vw;
+    background-color: var(--item-liste);
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-bottom: 1px solid lightgray;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90vw;
+    min-height: 9vh;
+    padding: min(2vh, 2vw);
+    border: 1px solid var(--item-liste-border);
+    border-radius: min(2vh, 2vw);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     transition: 0.5s ease;
+}
+
+.ListeItem:hover {
+    background-color: var(--item-liste-hover);
+    border: 1px solid var(--item-liste-border-hover);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    width: 92vw;
+    margin-left: 0vw;
 }
 
 .ListeItemContenu{
